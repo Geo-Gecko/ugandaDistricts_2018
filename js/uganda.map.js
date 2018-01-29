@@ -438,11 +438,10 @@
 
             header.html(str);
 
-            ugandaPath.style("fill", "#E3784A");
-            d3.select(this).style("fill", "#1984e3");
+            d3.select(this).style("fill", "#41b6c4");
 
-            d3.select("#dist-population-count").text(+(d.properties._Population_2014[0].key));
-            d3.select("#dist-household-count").text(+(d.properties._Household_2014[0].key));
+            d3.select("#dist-population-count").text((+(d.properties._Population_2014[0].key)).toLocaleString());
+            d3.select("#dist-household-count").text((+(d.properties._Household_2014[0].key)).toLocaleString());
 
             $("#distStats").show();
             var ugChart = d3.select(".statUG").selectAll("rect");
@@ -465,7 +464,7 @@
                 .attr("class", "districtLegend")
                 .attr("width", "100px")
                 .attr("height", "20px")
-                .attr("fill", "#1984e3");
+                .attr("fill", "#41b6c4");
             rectangles.append("text")
                 .attr("class", "districtLegend")
                 .attr("x", 6.33)
@@ -539,7 +538,7 @@
                 .attr('height', yScale.rangeBand() / 2 *0.8)
                 .attr('width', function(d) { return x(barValue(d)); })
                 .attr('stroke', 'white')
-                .attr('fill', '#1984e3');
+                .attr('fill', '#41b6c4');
 
             {
             // bar value labels
