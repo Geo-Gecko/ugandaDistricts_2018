@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Uganda Info Portal</title>
+    <link href="./css/bootstrap.min.css" rel="Stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400" rel="stylesheet">
+    <link href="./css/uganda.map.css" rel="Stylesheet" type="text/css">
+    <link href="./css/nouislider.css" rel="Stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin=""/>
+    <script src="./js/nouislider.js"></script>
+    <script src="./js/saveSvgAsPng.js"></script>
+    <script src="./js/pdf.js"></script>
+</head>
+
+<body>
+<div id="overlay" style="opacity: 0.8;">
+    <div id="overlay-content" style="opacity: 1;">
+        This product is in beta <br>
+        For <br>
+        -tailored solutions <br>
+        -additional indicators <br>
+        -higher level of detail <br>
+        -integration of your data <br><br>
+
+        please contact <a id="link" href="mailto:info@geogecko.com?Subject=Information%20on%20Portals" target="_top">info@geogecko.com</a>
+    </div>
+</div>
+<div class="main-container">
+
+    <!--<div class="top-panel col-md-8 col-sm-8" style="top: 10px; left: 350px;">
+        <div class="head" style="width: 200px; height: 60px; font-family: 'Montserrat', sans-serif; font-size: 13px; border-radius: 3px;">
+            <p>To Filter: Use Sliders Below <br/>
+                For Info: Click Map Feature </p>
+        </div>
+    </div>-->
+
+    <div class="top-panel col-md-8 col-sm-8">
+        <div class="title-panel col-md-12">
+            <div id="header-text">
+                <p><span>Data McDataface <i class="glyphicon glyphicon-info-sign"></i><br>
+                <i id="d3-map-refresh">Reset Filters</i></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel col-md-8 col-sm-8">
+        <p class="custom-list-header">Filters <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+        <div class="head col-md-2 col-sm-2" style="left: 10px;">
+            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Districts </p>
+            <p id="district-count" class="custom-count">0</p>
+        </div>
+        <div class=" head col-md-2 col-sm-2" style="left: 8px;">
+            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Population </p>
+            <p id="population-count" class="custom-count">0</p>
+        </div>
+        <div class="head col-md-2 col-sm-2" style="left: 5px;">
+            <p class="custom-count-header" style="height:23.2px;  font-size: 16px;">Households </p>
+            <p id="household-count" class="custom-count">0</p>
+        </div>
+        <div class="col-md-12">
+                <!--<p class="custom-list-header" style="display:inline-block; float: left; margin:0; width:25%;">Education &lt;!&ndash;<i class="glyphicon glyphicon-chevron-down">&ndash;&gt;</i></p>-->
+            <!--<div id="education-list" class="custom-list"></div>-->
+                <p class="custom-list-header">Socio-Economic <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+                    <div id="socio-economic-list" class="custom-list"></div>
+                <p class="custom-list-header">WASH & Health <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+                    <div id="wash-and-health-list" class="custom-list"></div>
+                <p class="custom-list-header">Energy <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+                    <div id="energy-list" class="custom-list"></div>
+
+            <p class="custom-list-header"><!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+            <div class="custom-list" style="margin: auto; left:50%; top: 50%">
+                <a href="https://www.geogecko.com/" target="_blank">
+                <img src="./data/Logo.svg" alt="Geo Gecko" style="width:261px; height:66px;">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="row" style="margin:0px;">
+    <!--<div class="bottom-panel col-md-12" style="padding: 0 5px;">  <span class="glyphicon glyphicon-menu-down"></span>-->
+    <div class="left-panel col-md-2">
+
+        <div class="menu-panel">
+
+            <div class="list-container">
+                <div class="col-md-12">
+                    <p id="districtHeader" class="custom-list-header">National Average </p>
+                    <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
+                    <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
+                    <div id="distStats">
+                        <div class="head col-md-2 col-sm-2" style="width: 47.8%;">
+                            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Population </p>
+                            <p id="dist-population-count" class="custom-count" style="background-color: #1984e3;">0</p>
+                        </div>
+                        <div class=" head col-md-2 col-sm-2" style="width: 47.8%;">
+                            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Households </p>
+                            <p id="dist-household-count" class="custom-count" style="background-color: #1984e3;">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="right-panel col-md-12 col-sm-12">
+        <div id="d3-map-container">
+            <div style="background:#f5f5f5;height:24px; position:absolute; top:0px; width:100%;">
+                <!--<p id="d3-map-make-pdf">Download PDF</p>-->
+                <div id="legend"></div>
+            </div>
+            <div id="d3-map-wrapper"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="./js/jquery.min.js"></script>
+<script>
+    $("#distStats").hide();
+    $.fn.center = function () {
+        this.css("position","absolute");
+        this.css("top", Math.max(0, (
+            ($(window).height() - $(this).outerHeight()) / 2) +
+            $(window).scrollTop()) + "px"
+        );
+        this.css("left", Math.max(0, (
+            ($(window).width() - $(this).outerWidth()) / 2) +
+            $(window).scrollLeft()) + "px"
+        );
+        return this;
+    }
+
+    $("#overlay").show();
+    $("#overlay-content").show().center();
+
+
+    $("#link").on("click", function () {
+        $("#overlay").show();
+    });
+
+    $("#overlay").on("click", function () {
+        $("#overlay").fadeOut();
+    });
+</script>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+        crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-image@latest/leaflet-image.js"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<script src="./js/d3.v3.min.js"></script>
+<script src="./js/L.D3SvgOverlay.min.js"></script>
+<script src="./js/topojson.v1.min.js"></script>
+<script src="./js/queue.v1.min.js"></script>
+<script src="./js/uganda.map.js"></script>
+
+<script type="text/javascript">
+</script>
+
+</body>
+</html>

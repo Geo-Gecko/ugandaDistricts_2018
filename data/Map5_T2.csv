@@ -1,0 +1,46 @@
+District,Settlement,Settlement_ID,Long,Lat,Tag
+Adjumani district,Pagirinya settlement,1,32.00925,3.379,1
+Adjumani district,"Maaji I,II, III settlements",2,31.66274606,3.19758096,1
+Adjumani district,"Mungula I, II settlements",3,31.8157116,3.1579196,1
+Adjumani district,Boroli settlement,4,31.866389,3.299444,1
+Adjumani district,Nyumanzi settlement,5,31.951458,3.438461,1
+Adjumani district,"Ayilo I,II settlements",6,31.96233333,3.2566,1
+Hoima district,Kyangwali settlement,7,30.812695,1.211136,1
+Koboko district,Kuluba collection point,8,30.93260556,3.506605556,3
+Arua district,Ocea reception centre,9,31.282122,3.072928,3
+Arua district,Rhino settlement,10,31.353345,2.965111,1
+Arua district,Imvepi settlement,11,31.28612293,3.258081008,1
+Lamwo district,Palabek settlement,12,32.412692,3.364856,1
+Yumbe district,Bidibidi settlement,13,31.44658,3.567,1
+Amuru district,Elegu collection point,14,32.07047,3.567,3
+Moyo district,Palorinya settlement,15,31.659742,3.508815,1
+Kamwenge district,Rwamwanja settlement,16,30.630799,0.321722,1
+Kisoro district,Nyakabande transit centre,17,29.733334,-1.283333,3
+Isingiro district,Nakivale settlement,18,30.949444,-0.776389,1
+Isingiro district,Oruchinga settlement,19,30.637274,-0.961159,1
+Kyegegwa district,Kyaka II settlement,20,31.081311,0.357999,1
+Kiryandongo district,Kiryandongo transit centre,21,32.161478,1.938358,3
+Kiryandongo district,Kiryandongo settlement,22,32.0651378,1.89279254,1
+Kampala district,Urban Kampala,23,,,
+Lamwo district,Waligo collection point,24,32.58832813,3.431166626,3
+Adjumani district,Pagrinya reception centre 1,25,32.003,3.35378,3
+Adjumani district,Pagrinya reception centre 2,26,32.014,3.38983,3
+Koboko district,Oraba entry point,27,30.88343845,3.533633654,2
+Adjumani district,Olua I settlement,28,31.887626,3.239910982,1
+Adjumani district,Olua II settlement,29,31.884244,3.264945055,1
+Lamwo district,Ngomoromo collection point,30,32.579444,3.679694,3
+Yumbe district,Menzere collection point,31,31.1880951,3.707013104,3
+Moyo district,Metu collection point,32,31.7865,3.671,3
+Lamwo district,Madi Opei collection point,33,33.101944,3.591111,3
+Koboko district,Lobule settlement,34,31.033333,3.4,1
+Moyo district,Afogi collection point,35,31.744,3.754,3
+Moyo district,Laufori collection point,36,31.59693,3.592,3
+Moyo district,Kerwa collection point,37,31.25643366,3.748745448,3
+Yumbe district,Gobolo colelction point,38,31.51,3.639,3
+Adjumani district,Elema settlement,39,31.909797,3.479245,1
+Koboko district,Busia entry point,40,30.97373166,3.6888497,2
+Lamwo district,Aweno - Olwi collection point,41,32.747083,3.719556,3
+Kanungu district,Matanda transit centre,42,29.744528,-0.651167,3
+Adjumani district,Dzaipi transit centre,43,31.955,3.402122,3
+Bundibugyo district,Bubukwanga transit centre,44,30.062306,0.768278,3
+Koboko district,Salia Musala entry point,45,30.863319,3.479902,2

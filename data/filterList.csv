@@ -1,0 +1,40 @@
+ID,FieldNames,Theme
+1,Households_2014,Demographics
+2,Population_2014,Demographics
+3,Male_2014,Demographics
+4,Female_2014,Demographics
+5,Area_GIS_km2,Demographics
+6,Population_Density_2014,Demographics
+7,Average_Household_Size_2014,Demographics
+8,Attending_School_6_to_12yr_2014,Education
+9,Not_attending_School_6_to_12yr_2014,Education
+10,Never_been_to_School_15plus_2014,Education
+11,Attended_Primary_15plus_2014,Education
+12,Attended_Secondary_and_above_15plus_2014,Education
+13,Literate_18plus_2014,Education
+14,Not_Literate_18plus_2014,Education
+15,HH_Subsistence_Farming_2014,Socio-Economic
+16,HH_non_Subsistence_Farming_2014,Socio-Economic
+17,HH_own_Radio_2014,Socio-Economic
+18,HH_own_Bicycle_2014,Socio-Economic
+19,HH_own_Motorcycle_2014,Socio-Economic
+20,HH_own_Moquito_Net_2014,Socio-Economic
+21,HH_own_two_sets_Clothing_2014,Socio-Economic
+22,HH_Salt_available_2014,Socio-Economic
+23,HH_at_least_two_Meals_a_Day_2014,Socio-Economic
+24,HH_Wall_temporary_2014,Socio-Economic
+25,HH_Wall_permanent_2014,Socio-Economic
+26,HH_Roof_temporary_2014,Socio-Economic
+27,HH_Roof_permanent_2014,Socio-Economic
+28,HH_Floor_temporary_2014,Socio-Economic
+29,HH_Floor_permanent_2014,Socio-Economic
+30,HH_Unprotected_Drinking_Water_2014,WASH & Health
+31,HH_Protected_Drinking_Water_2014,WASH & Health
+32,HH_Improved_Toilet_2014,WASH & Health
+33,HH_Unimproved_Toilet_2014,WASH & Health
+34,HH_No_Toilet_2014,WASH & Health
+35,HH_Lighting_Electricity_2014,Energy
+36,HH_Lighting_Electricity_2014_percent,Energy
+37,HH_Lighting_Paraffin_Lantern_2014,Energy
+38,HH_Lighting_Paraffin_Tadooba_2014,Energy
+39,HH_Lighting_Other_2014,Energy

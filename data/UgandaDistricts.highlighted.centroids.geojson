@@ -1,0 +1,22 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "dist": "AMURU DISTRICT", "idug": 8 }, "geometry": { "type": "Point", "coordinates": [ 31.973424343923909, 3.050067230624681 ] } },
+{ "type": "Feature", "properties": { "dist": "ADJUMANI DISTRICT", "idug": 2 }, "geometry": { "type": "Point", "coordinates": [ 31.769172923937614, 3.225383294057605 ] } },
+{ "type": "Feature", "properties": { "dist": "HOIMA DISTRICT", "idug": 31 }, "geometry": { "type": "Point", "coordinates": [ 31.066035833751471, 1.43144775480432 ] } },
+{ "type": "Feature", "properties": { "dist": "KAMWENGE DISTRICT", "idug": 45 }, "geometry": { "type": "Point", "coordinates": [ 30.493792629711209, 0.225583864205702 ] } },
+{ "type": "Feature", "properties": { "dist": "KISORO DISTRICT", "idug": 56 }, "geometry": { "type": "Point", "coordinates": [ 29.680216717399979, -1.217297480858425 ] } },
+{ "type": "Feature", "properties": { "dist": "KOBOKO DISTRICT", "idug": 58 }, "geometry": { "type": "Point", "coordinates": [ 31.007765619818731, 3.526188785812692 ] } },
+{ "type": "Feature", "properties": { "dist": "KAMPALA DISTRICT", "idug": 43 }, "geometry": { "type": "Point", "coordinates": [ 32.597275105298159, 0.315720049403047 ] } },
+{ "type": "Feature", "properties": { "dist": "ARUA DISTRICT", "idug": 10 }, "geometry": { "type": "Point", "coordinates": [ 31.137032549753364, 2.951300072732414 ] } },
+{ "type": "Feature", "properties": { "dist": "KIRYANDONGO DISTRICT", "idug": 55 }, "geometry": { "type": "Point", "coordinates": [ 32.041023320752309, 2.023096831463109 ] } },
+{ "type": "Feature", "properties": { "dist": "YUMBE DISTRICT", "idug": 111 }, "geometry": { "type": "Point", "coordinates": [ 31.287386125798111, 3.519631603119535 ] } },
+{ "type": "Feature", "properties": { "dist": "MOYO DISTRICT", "idug": 82 }, "geometry": { "type": "Point", "coordinates": [ 31.671975749878463, 3.527550358470951 ] } },
+{ "type": "Feature", "properties": { "dist": "ISINGIRO DISTRICT", "idug": 34 }, "geometry": { "type": "Point", "coordinates": [ 30.87760126017416, -0.853042686791026 ] } },
+{ "type": "Feature", "properties": { "dist": "LAMWO DISTRICT", "idug": 66 }, "geometry": { "type": "Point", "coordinates": [ 32.728792228448476, 3.54468892608794 ] } },
+{ "type": "Feature", "properties": { "dist": "KYEGEGWA DISTRICT", "idug": 64 }, "geometry": { "type": "Point", "coordinates": [ 31.001976658493959, 0.450694842511181 ] } },
+{ "type": "Feature", "properties": { "dist": "KANUNGU DISTRICT", "idug": 46 }, "geometry": { "type": "Point", "coordinates": [ 29.725659807643119, -0.803030579686339 ] } },
+{ "type": "Feature", "properties": { "dist": "BUNDIBUGYO DISTRICT", "idug": 21 }, "geometry": { "type": "Point", "coordinates": [ 30.055930028422416, 0.69521473711155 ] } }
+]
+}

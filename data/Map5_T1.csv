@@ -1,0 +1,92 @@
+Full Name,Name,Abb,Actor_ID,Actor_Type
+ACAV,ACAV (ACAV),ACAV,1,OP
+Action Africa Help ,Action Africa Help  (AAH),AAH,2,OP
+Action Against Hunger ,Action Against Hunger  (ACF),ACF,3,OP
+Adventist Development and Relief Agency ,Adventist Development and Relief Agency  (ADRA),ADRA,4,OP
+Africa ministry revival,Africa ministry revival (AMR),AMR,5,OP
+African Initiatives for Relief and Development ,African Initiatives for Relief and Development  (AIRD),AIRD,6,OP
+Agency for Cooperation and Research in Development  ,Agency for Cooperation and Research in Development   (ACORD),ACORD,7,OP
+Africa Humanitarian Action,Africa Humanitarian Action (AHA),AHA,8,OP
+American Refugee Committee ,American Refugee Committee  (ARC),ARC,9,OP
+Care and Assistance for Forced Migrants,Care and Assistance for Forced Migrants (CAFOMI),CAFOMI,10,OP
+Care International ,Care International  (CARE),CARE,11,OP
+Caritas  ,Caritas   (Caritas),Caritas,12,OP
+Cesvi Onlus - Cooperazione e Sviluppo ,Cesvi Onlus - Cooperazione e Sviluppo  (CESVI),CESVI,13,OP
+Community Empowerment for Rural Development ,Community Empowerment for Rural Development  (CEFORD),CEFORD,14,OP
+Concern World Wide ,Concern World Wide  (CWW),CWW,15,OP
+Convention on the Rights of the Child,Convention on the Rights of the Child (CRC),CRC,16,OP
+DanChurchAid ,DanChurchAid  (DCA),DCA,17,OP
+Danish Refugee Council ,Danish Refugee Council  (DRC),DRC,18,OP
+DHO,DHO (DHO),DHO,19,OP
+Finn Church Aid ,Finn Church Aid  (FCA),FCA,20,OP
+Finnish Refugee Council ,Finnish Refugee Council  (FRC),FRC,21,OP
+Food for the Hungry ,Food for the Hungry  (FH),FH,22,OP
+"Government , Office of the Prime Minister ","Government , Office of the Prime Minister  (OPM)",OPM,23,IP
+Hebrew Immigrant Aid Society (HIAS),Hebrew Immigrant Aid Society (HIAS) (HIAS),HIAS,24,OP
+Here is Life,Here is Life (HiL),HiL,25,OP
+Humanitarian Initiative Just Relief Aid ,Humanitarian Initiative Just Relief Aid  (HIJRA),HIJRA,26,OP
+Interaid Uganda ,Interaid Uganda  (IAU),IAU,27,OP
+International Aid Services ,International Aid Services  (IAS),IAS,28,OP
+International Committee of the Red Cross,International Committee of the Red Cross (ICRC),ICRC,29,OP
+International Federation of Red Cross,International Federation of Red Cross (IFRC),IFRC,30,OP
+International organization for migration ,International organization for migration  (IOM),IOM,31,UN
+International Rescue Committee,International Rescue Committee (IRC),IRC,32,OP
+Lutheran World Federation ,Lutheran World Federation  (LWF),LWF,33,OP
+Malteser International ,Malteser International  (MI),MI,34,OP
+Médecins Sans Frontières,Médecins Sans Frontières (MSF),MSF,35,OP
+Medical Teams International ,Medical Teams International  (MTI),MTI,36,OP
+Mercy Corps,Mercy Corps (MC),MC,37,OP
+Norwegian Refugee Council ,Norwegian Refugee Council  (NRC),NRC,38,OP
+NSAMIZI  training Institute of Social Development,NSAMIZI  training Institute of Social Development (NSAMIZI),NSAMIZI,39,OP
+Obadiah Brothers Canada ,Obadiah Brothers Canada  (OBK),OBK,40,OP
+OXFAM,OXFAM (OXFAM),OXFAM,41,OP
+Peace Winds Japan,Peace Winds Japan (Peace Wind),Peace Wind,42,OP
+Peter C. Alderman Foundation ,Peter C. Alderman Foundation  (PCAF),PCAF,43,OP
+Plan International Uganda ,Plan International Uganda  (PLAN),PLAN,44,OP
+Real Medicine Foundation ,Real Medicine Foundation  (RMF),RMF,45,OP
+Refugee Law Project,Refugee Law Project (RLP),RLP,46,OP
+Rural Initiative for Community Empowerment ,Rural Initiative for Community Empowerment  (RICE),RICE,47,OP
+Samaritan's Purse ,Samaritan's Purse  (SP),SP,48,OP
+Save the Children ,Save the Children  (SCI),SCI,49,OP
+TCNs Ugandan nationals,TCNs Ugandan nationals (TCN Ug),TCN Ug,50,OP
+The Association of Volunteers in International Service ,The Association of Volunteers in International Service  (AVSI),AVSI,51,OP
+The Israel Forum for International Humanitarian Aid,The Israel Forum for International Humanitarian Aid (IsraAID),IsraAID,52,OP
+Touch Africa ,Touch Africa  (TAN),TAN,53,OP
+Transcultural Psychosocial Organization ,Transcultural Psychosocial Organization  (TPO),TPO,54,OP
+Tutapona ,Tutapona  (TUTAPONA),TUTAPONA,55,OP
+Uganda Government,Uganda Government (Government),Government,56,IP
+Uganda Red Cross,Uganda Red Cross (URC),URC,57,OP
+Ugandan Red Cross Society ,Ugandan Red Cross Society  (URCS),URCS,58,OP
+Ugandan Refugee and Disaster Management Council ,Ugandan Refugee and Disaster Management Council  (URDMC),URDMC,59,OP
+United Nation Food Assistant Organization ,United Nation Food Assistant Organization  (FAO),FAO,60,UN
+United Nation High Commissioner for Refugees ,United Nation High Commissioner for Refugees  (UNHCR),UNHCR,61,UN
+United Nations Entity for Gender Equality and the Empowerment of Women ,United Nations Entity for Gender Equality and the Empowerment of Women  (UNWOMEN),UNWOMEN,62,UN
+United Nations International Children's Emergency Fund ,United Nations International Children's Emergency Fund  (UNICEF),UNICEF,63,UN
+United Nations Population Fund ,United Nations Population Fund  (UNFPA),UNFPA,64,UN
+Volunteer Efforts for Development Concerns ,Volunteer Efforts for Development Concerns  (VEDCO),VEDCO,66,OP
+War Child Canda ,War Child Canda  (WCC),WCC,67,OP
+War Child Holland ,War Child Holland  (WCH),WCH,68,OP
+Water Mission International ,Water Mission International  (WMI),WMI,69,OP
+Welthungerhilfe,Welthungerhilfe (WHH),WHH,71,OP
+Windle Trust Uganda ,Windle Trust Uganda  (WTU),WTU,72,OP
+World Food Programme ,World Food Programme  (WFP),WFP,73,IP
+World Health Organization ,World Health Organization  (WHO),WHO,74,IP
+World Vision International ,World Vision International  (WVI),WVI,75,OP
+ZOA- Uganda ,ZOA- Uganda  (ZOA),ZOA,76,OP
+Arua - District Local Government ,Arua - District Local Government  (A-DLG),A-DLG,77,IP
+Lamwo - District Local Government ,Lamwo - District Local Government  (L-DLG),L-DLG,78,IP
+Hoima - District Local Government ,Hoima - District Local Government  (H-DLG),H-DLG,79,IP
+Isingiro - District Local Government ,Isingiro - District Local Government  (I-DLG),I-DLG,80,IP
+Kamwenge - District Local Government ,Kamwenge - District Local Government  (Ka-DLG),Ka-DLG,81,IP
+Koboko - District Local Government ,Koboko - District Local Government  (Ko-DLG),Ko-DLG,82,IP
+Kyegegwa - District Local Government ,Kyegegwa - District Local Government  (Ky-DLG),Ky-DLG,83,IP
+Kiryandongo - District Local Government ,Kiryandongo - District Local Government  (Ki-DLG),Ki-DLG,84,IP
+Moyo - District Local Government ,Moyo - District Local Government  (M-DLG),M-DLG,85,IP
+Yumbe - District Local Government ,Yumbe - District Local Government  (Y-DLG),Y-DLG,86,IP
+MSF-F,MSF-F (MSF-F),MSF-F,87,OP
+MSF-Holland,MSF-Holland (MSF-H),MSF-H,88,OP
+MSF-Spain,MSF-Spain (MSF-S),MSF-S,89,OP
+MSF-France,MSF-France (MSF-FR),MSF-FR,90,OP
+Raising Voices,Raising Voices (RV),RV,91,OP
+Catholic Organisation for Relief and Development Aid,Catholic Organisation for Relief and Development Aid (CORDAID),CORDAID,92,OP
+Agency for Technical Cooperation and Development,Agency for Technical Cooperation and Development (ACTED),ACTED,93,IP
