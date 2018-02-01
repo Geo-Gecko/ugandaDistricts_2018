@@ -45,9 +45,9 @@
     </div>-->
 
     <div class="top-panel col-md-8 col-sm-8">
-        <div class="title-panel col-md-12" style="left: 50%";>
+        <div class="title-panel col-md-12">
             <div id="header-text">
-                <p><span>Data McDataface <small><i class="glyphicon glyphicon-info-sign"></i></small><br></span>
+                <p><span>Data <br> McDataface <small><i class="glyphicon glyphicon-info-sign"></i></small><br></span>
                 <!--<span style="border-radius: 10px;"><i id="d3-map-refresh">Reset Filters </i></span>-->
                     <!--<span style="border-radius: 10px;"><i id="d3-map-make-pdf">Download PDF </i></span>-->
                 </p>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="right-panel col-md-8 col-sm-8">
-        <p class="custom-list-header">Filters <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+        <p class="custom-list-header" style="width:100%">Filters <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
         <div class="head col-md-2 col-sm-2" style="left: 10px;">
             <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Districts </p>
             <p id="district-count" class="custom-count">0</p>
@@ -70,11 +70,11 @@
             <p id="household-count" class="custom-count">0</p>
         </div>
         <div class="col-md-12">
-                <!--<p class="custom-list-header" style="display:inline-block; float: left; margin:0; width:25%;">Education &lt;!&ndash;<i class="glyphicon glyphicon-chevron-down">&ndash;&gt;</i></p>-->
-            <!--<div id="education-list" class="custom-list"></div>-->
                 <p class="custom-list-header">Socio-Economic <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
                     <div id="socio-economic-list" class="custom-list"></div>
-                <p class="custom-list-header">WASH & Health <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+            <p class="custom-list-header">Education <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
+            <div id="education-list" class="custom-list"></div>
+            <p class="custom-list-header">WASH & Health <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
                     <div id="wash-and-health-list" class="custom-list"></div>
                 <p class="custom-list-header">Energy <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
                     <div id="energy-list" class="custom-list"></div>
@@ -99,18 +99,18 @@
             <div class="list-container">
                 <div class="col-md-12">
                     <p id="districtHeader" class="custom-list-header">National Average </p>
+                    <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
+                    <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
                     <div id="distStats">
-                        <div class="head col-md-2 col-sm-2" style="width: 47.8%;">
+                        <div class="head col-md-2 col-sm-2" style="width: 47.5%;">
                             <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Population </p>
                             <p id="dist-population-count" class="custom-count" style="background-color: #1984e3;">0</p>
                         </div>
-                        <div class=" head col-md-2 col-sm-2" style="width: 47.8%;">
+                        <div class=" head col-md-2 col-sm-2" style="width: 47.5%;">
                             <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Households </p>
                             <p id="dist-household-count" class="custom-count" style="background-color: #1984e3;">0</p>
                         </div>
                     </div>
-                    <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
-                    <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
                 </div>
             </div>
 

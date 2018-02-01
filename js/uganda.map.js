@@ -123,26 +123,28 @@
     }).sortKeys(d3.ascending).entries(filterList);
 
     var filterList = d3.nest().key(function(d) {
-        return d.FieldNames;
+        return d.Name;
     }).sortKeys(d3.ascending).entries(filterList);
+        // console.log(filterList);
 
     var educationList = filterList.filter(function (d) {
-            if (d.values[0].Theme === "Education") {
+            if (d.values[0].Theme === "Education (% of population)") {
                 return d.key; //return d.Actor_Type["UN"];
             }
         });
     var socioEconomicList = filterList.filter(function (d) {
-            if (d.values[0].Theme === "Socio-Economic") {
+            if (d.values[0].Theme === "Socio-Economic (% of households)") {
                 return d.key; //return d.Actor_Type["UN"];
             }
-        });
+        })
+
     var washAndHealthList = filterList.filter(function (d) {
-            if (d.values[0].Theme === "WASH & Health") {
+            if (d.values[0].Theme === "WASH & Health (% of households)") {
                 return d.key; //return d.Actor_Type["UN"];
             }
         });
     var energyList = filterList.filter(function (d) {
-            if (d.values[0].Theme === "Energy") {
+            if (d.values[0].Theme === "Energy (% of households)") {
                 return d.key; //return d.Actor_Type["UN"];
             }
         });
@@ -277,7 +279,7 @@
             ]);
         map.options.maxZoom=12;
         map.options.minZoom=7;
-        map.on("moveend", function(d){
+       /* map.on("moveend", function(d){
             var zoomlevel = map.getZoom()
             //console.log(zoomlevel);
             d3.selectAll(".label").each(function () {
@@ -292,7 +294,7 @@
             // $(".leaflet-pane").css("transform-origin", toX + "px " + toY + "px");
             // mapTransform = $(".leaflet-pane").css("transform");
             // console.log(mapTransform);
-
+/!*
         if (zoomlevel >= 10){
             d3.selectAll(".settlement").each(function () {
                 var element = d3.select(this);
@@ -310,10 +312,10 @@
                     });
             });
 
-            ugandaPath.style("opacity", 0.7);
+            ugandaPath.style("opacity", 0.7);*!/
 
 
-        }
+       /!* }
         else if (zoomlevel < 10) {
         d3.selectAll(".label").each(function () {
                 var element = d3.select(this);
@@ -322,8 +324,8 @@
             //ugandaPath.style("opacity", 1);
 
         }
-
-        });
+*!/
+        });*/
         //zoom level 10, display text.
 
 
@@ -437,15 +439,16 @@
             console.log(selectedDistrict);
 
             var needRemove = $(d3.select(this).node()).hasClass("d3-active"); //d3.select(this).attr("class");//d3-active
-            d3.select(this).classed("d3-active", !needRemove).style("fill", needRemove ? "#1984e3" :
-                "#E3784A");
+            d3.select(this).classed("d3-active", !needRemove).style("fill", needRemove ? "#E3784A" :
+                "#41b6c4");
+            console.log(d.properties);
 
-            if (d.properties.dist === c.key) {
-                //console.log(a);
-                //console.log(c);
-                a.properties._selected = !needRemove;
-                return a.properties._selected ? 1 : opacity;
-            }
+            // if (d.properties.dist === c.key) {
+            //     //console.log(a);
+            //     //console.log(c);
+            //     a.properties._selected = !needRemove;
+            //     return a.properties._selected ? 1 : opacity;
+            // }
 
             var header = d3.select("#districtHeader");
             var str = "National Average versus " + d.properties.DNAME_06 + " district";
@@ -500,11 +503,11 @@
                 for (var j = 0; j < dataset1.length ; j++) {
                     // console.log(dataset1);
                     // console.log(sliders[j].__data__.key);
-                    header.push(sliders[i].__data__.key);
+                    header.push(sliders[i].__data__.values[0].FieldNames);
 
                     if (dataset1[j]["DNAME2016"]===d.properties.dist) {
                         // console.log(dataset1[i]);
-                        headerValues = +(dataset1[j][sliders[i].__data__.key]) + headerValues;
+                        headerValues = +(dataset1[j][sliders[i].__data__.values[0].FieldNames]) + headerValues;
                         // console.log(districtValue, +(sliderData[1][j][0]), +(sliderData[1][j][1]));
                         //console.log(+(sliderData[1][j][0]));
                         // console.log(+((sliderData[1][j][0]).replace('%', '')), sliderData[1][j][0]);
@@ -524,11 +527,11 @@
 
             var valueLabelWidth = 40; // space reserved for value labels (right)
             var barHeight = 25; // height of one bar
-            var barLabelWidth = 210; // space reserved for bar labels
+            var barLabelWidth = 200; // space reserved for bar labels
             // var barLabelPadding = 5; // padding between bar and bar labels (left)
             var gridLabelHeight = 18; // space reserved for gridline labels
             var gridChartOffset = 3; // space between start of grid and first bar
-            var maxBarWidth = 200; // width of the bar with the max value
+            var maxBarWidth = 190; // width of the bar with the max value
 
 // accessor functions
 //             var barLabel = function(d) {  return d; };
@@ -1010,7 +1013,7 @@
               });
           _districtList.exit().remove();
       }
-      if (themeList) {
+      /*if (themeList) {
             d3.select("#theme-count").text(themeList.length);
             var _themeList = d3.select("#theme-list").selectAll("p")
                 .data(themeList);
@@ -1044,7 +1047,7 @@
                     // });
                     // d3.select(".settlement").style("opacity", 0);
                     // d3.select(".settlement-" + c.values[0].Settlement_ID).style("opacity", 1);
-                    /*global.selectedDistrict.map(function (a) {
+                    /!*global.selectedDistrict.map(function (a) {
                         //console.log(a);
                         d3.selectAll(".settlement-district-" + a.key.toLowerCase().replaceAll("[ ]", "-")).style("opacity", 1);
                         d3.selectAll(".district-" + a.key.toLowerCase().replaceAll('[ ]', "-")).style("opacity", 1);
@@ -1053,7 +1056,7 @@
                     if(global.selectedDistrict.length === 0){refreshCounts(); refreshMap();}
                     var secList = d3.select("#sector-list").selectAll("p");
                     //console.log(disList, secList, setList, ageList);
-                    { secList.style("background", secList[0].length === 1 ? "#E3784A" : "transparent");}*/
+                    { secList.style("background", secList[0].length === 1 ? "#E3784A" : "transparent");}*!/
                 });
             _themeList
                 .attr("class", function (d) {
@@ -1063,7 +1066,7 @@
                     return d.key;
                 });
             _themeList.exit().remove();
-        }
+        }*/
       if (educationList) {
             var _educationList = d3.select("#education-list").selectAll("p")
                   .data(educationList);
@@ -1134,7 +1137,7 @@
             //console.log(educationList);
         }
 
-        //d3.select("#education-list").selectAll("p").append("div").attr("class", "sliders");
+        d3.select("#education-list").selectAll("p").append("div").attr("class", "sliders");
         d3.select("#socio-economic-list").selectAll("p").append("div").attr("class", "sliders");
         d3.select("#wash-and-health-list").selectAll("p").append("div").attr("class", "sliders");
         d3.select("#energy-list").selectAll("p").append("div").attr("class", "sliders");
@@ -1143,29 +1146,28 @@
         //     .attr("class", "sliders");
 
         var sliders = document.getElementsByClassName('sliders');
-        //console.log(sliders);
+        // console.log(sliders);
         var fieldName = [];
 
         for ( var i = 0; i < sliders.length; i++ ) {
             var domain =[+Infinity, -Infinity];
 
-
-            fieldName.push([sliders[i].__data__.key]);
-            // console.log([sliders[i].__data__.key]);
+            // console.log([sliders[i].__data__.values[0].FieldNames]);
+            fieldName.push([sliders[i].__data__.values[0].FieldNames]);
             //console.log(sliders[i].__data__.key);
 
 
         //console.log(sliders[i].__data__);
         for (var j = 0; j < dataset1.length; j++) {
-            // console.log(+(dataset1[j]));
+            // console.log((dataset1[j]));
             var Population = +(dataset1[j]["Population_2014"]);
             var Household = +(dataset1[j]["Households_2014"]);
             var filterValue;
 
-            if (sliders[i].__data__.values[0].Theme === "Education") {
-                filterValue = +(dataset1[j][sliders[i].__data__.key])  / Population * 100 ;
+            if (sliders[i].__data__.values[0].Theme === "Education (% of population)") {
+                filterValue = +(dataset1[j][sliders[i].__data__.values[0].FieldNames])  / Population * 100 ;
             } else {
-                filterValue = +(dataset1[j][sliders[i].__data__.key])  / Household * 100 ;
+                filterValue = +(dataset1[j][sliders[i].__data__.values[0].FieldNames])  / Household * 100 ;
             }
             domain[0] = filterValue < domain[0] ? filterValue :
                 domain[
@@ -1266,7 +1268,7 @@
                 realRange.push(rangeMin.concat(rangeMax));
 
 
-                if (sliders[i].__data__.values[0].Theme === "Education") {
+                if (sliders[i].__data__.values[0].Theme === "Education (% of population)") {
                     rangeMin = [+(rangeMin) * Population / 100];
                     rangeMax = [+(rangeMax) * Population / 100];
                 } else {
@@ -1330,8 +1332,10 @@
 
 
 
-                ugandaPath.style("fill", function (a) {
-                console.log(a);
+                ugandaPath.style("fill", function (d) {
+                    var clicked = d3.select(".d3-active");
+                    console.log(clicked[0][0].__data__.properties.dist);
+                // console.log(a);
                     /*if (a.properties. === c.key) {
                         //console.log(a);
                         //console.log(c);
@@ -1339,14 +1343,16 @@
                         return a.properties._selected ? 1 : opacity;
                     }
                     return a.properties._selected ? 1 : opacity;
-                });
+                });*/
                 for (var k = 0; k < filteredDistricts.length; k++) {
                     // console.log(filteredDistricts[k]);
-                    if (d.properties.dist === filteredDistricts[k]) {
+                    if (d.properties.dist === clicked[0][0].__data__.properties.dist)  {
+                        return "#41b6c4";
+                    }else if (d.properties.dist === filteredDistricts[k]) {
                         return "none";
                     }
                 }
-                return "#e3784a";*/
+                return "#e3784a";
 
 
             });
@@ -1382,11 +1388,11 @@
             for (var j = 0; j < dataset1.length ; j++) {
                 // console.log(dataset1);
                 // console.log(sliders[j].__data__.key);
-                header.push(sliders[i].__data__.key);
+                header.push(sliders[i].__data__.values[0].FieldNames);
 
-                if (dataset1[j][sliders[i].__data__.key]) {
+                if (dataset1[j][sliders[i].__data__.values[0].FieldNames]) {
                     // console.log(dataset1[i]);
-                    headerValues = +(dataset1[j][sliders[i].__data__.key]) + headerValues;
+                    headerValues = +(dataset1[j][sliders[i].__data__.values[0].FieldNames]) + headerValues;
                     // console.log(districtValue, +(sliderData[1][j][0]), +(sliderData[1][j][1]));
                     //console.log(+(sliderData[1][j][0]));
                     // console.log(+((sliderData[1][j][0]).replace('%', '')), sliderData[1][j][0]);
@@ -1405,11 +1411,11 @@
 
         var valueLabelWidth = 40; // space reserved for value labels (right)
         var barHeight = 25; // height of one bar
-        var barLabelWidth = 210; // space reserved for bar labels
+        var barLabelWidth = 200; // space reserved for bar labels
         var barLabelPadding = 5; // padding between bar and bar labels (left)
         var gridLabelHeight = 18; // space reserved for gridline labels
         var gridChartOffset = 3; // space between start of grid and first bar
-        var maxBarWidth = 200; // width of the bar with the max value
+        var maxBarWidth = 190; // width of the bar with the max value
 
 // accessor functions
         var barLabel = function(d) {  return d; };
