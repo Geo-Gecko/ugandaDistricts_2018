@@ -17,18 +17,24 @@
 </head>
 
 <body>
-<div id="overlay" style="opacity: 0.8;">
-    <div id="overlay-content" style="opacity: 1;">
-        This product is in beta <br>
-        For <br>
-        -tailored solutions <br>
-        -additional indicators <br>
-        -higher level of detail <br>
-        -integration of your data <br><br>
+<div id="overlay-content">
+    This product is in beta <br>
+    For <br>
+    -tailored solutions <br>
+    -additional indicators <br>
+    -higher level of detail <br>
+    -integration of your data <br><br>
 
-        please contact <a id="link" href="mailto:info@geogecko.com?Subject=Information%20on%20Portals" target="_top">info@geogecko.com</a>
+    please contact <a href="info@geogecko.com" target="_top">info@geogecko.com</a>
+
+    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; left:50%; top: 50%">
+        <a href="https://www.geogecko.com/" target="_blank">
+            <img src="./data/Logo.svg" alt="Geo Gecko" style="width:261px; height:66px;">
+        </a>
     </div>
+
 </div>
+<div id="overlay"></div>
 <div class="main-container">
 
     <!--<div class="top-panel col-md-8 col-sm-8" style="top: 10px; left: 350px;">
@@ -39,10 +45,12 @@
     </div>-->
 
     <div class="top-panel col-md-8 col-sm-8">
-        <div class="title-panel col-md-12">
+        <div class="title-panel col-md-12" style="left: 50%";>
             <div id="header-text">
-                <p><span>Data McDataface <i class="glyphicon glyphicon-info-sign"></i><br>
-                <i id="d3-map-refresh">Reset Map</i></span></p>
+                <p><span>Data McDataface <small><i class="glyphicon glyphicon-info-sign"></i></small><br></span>
+                <!--<span style="border-radius: 10px;"><i id="d3-map-refresh">Reset Filters </i></span>-->
+                    <!--<span style="border-radius: 10px;"><i id="d3-map-make-pdf">Download PDF </i></span>-->
+                </p>
             </div>
         </div>
     </div>
@@ -91,18 +99,18 @@
             <div class="list-container">
                 <div class="col-md-12">
                     <p id="districtHeader" class="custom-list-header">National Average </p>
-                    <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
-                    <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
                     <div id="distStats">
                         <div class="head col-md-2 col-sm-2" style="width: 47.8%;">
                             <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Population </p>
-                            <p id="dist-population-count" class="custom-count" style="background-color: #41b6c4;">0</p>
+                            <p id="dist-population-count" class="custom-count" style="background-color: #1984e3;">0</p>
                         </div>
                         <div class=" head col-md-2 col-sm-2" style="width: 47.8%;">
                             <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Households </p>
-                            <p id="dist-household-count" class="custom-count" style="background-color: #41b6c4;">0</p>
+                            <p id="dist-household-count" class="custom-count" style="background-color: #1984e3;">0</p>
                         </div>
                     </div>
+                    <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
+                    <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
                 </div>
             </div>
 
@@ -142,14 +150,12 @@
 
     $("#overlay").show();
     $("#overlay-content").show().center();
+    $("#header").center();
 
-
-    $("#link").on("click", function () {
-        $("#overlay").show();
-    });
 
     $("#overlay").on("click", function () {
         $("#overlay").fadeOut();
+        $("#overlay-content").fadeOut();
     });
 </script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"

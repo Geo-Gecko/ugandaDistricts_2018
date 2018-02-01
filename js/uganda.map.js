@@ -433,6 +433,20 @@
         .on("click", function (d) {
             // console.log(d);
 
+            var selectedDistrict = d3.select(this);
+            console.log(selectedDistrict);
+
+            var needRemove = $(d3.select(this).node()).hasClass("d3-active"); //d3.select(this).attr("class");//d3-active
+            d3.select(this).classed("d3-active", !needRemove).style("fill", needRemove ? "#1984e3" :
+                "#E3784A");
+
+            if (d.properties.dist === c.key) {
+                //console.log(a);
+                //console.log(c);
+                a.properties._selected = !needRemove;
+                return a.properties._selected ? 1 : opacity;
+            }
+
             var header = d3.select("#districtHeader");
             var str = "National Average versus " + d.properties.DNAME_06 + " district";
 
@@ -633,12 +647,12 @@
                 });*/
             }
         })
-        .style("fill", function(d){
+        .style("fill", "#e3784a")/*function(d){
             //console.log(color(d.properties._HH_Improved_Toilet_2014[0].key));
             //console.log(d.properties._HH_Improved_Toilet_2014[0].key);
-            var filterValue = +(d.properties._Population_2014[0].key);
+            // var filterValue = +(d.properties._Population_2014[0].key);
             return "#e3784a";
-        })
+        })*/
         .attr("class", function (d) {
           return "district district-" + d.properties.DNAME_06.replaceAll('[ ]', "_");
         });
@@ -681,9 +695,9 @@
         });
       ugandaPath.exit().remove();
     });
-    var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-    });
+    // var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    //   attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+    // });
     // L.control.layers({
     //   "Geo Tiles": tiles
     // }, {
@@ -1315,14 +1329,24 @@
             d3.select("#household-count").text((global.householdCount - filteredHH).toLocaleString());
 
 
-            ugandaPath.style("fill", function (d) {
+
+                ugandaPath.style("fill", function (a) {
+                console.log(a);
+                    /*if (a.properties. === c.key) {
+                        //console.log(a);
+                        //console.log(c);
+                        a.properties._selected = !needRemove;
+                        return a.properties._selected ? 1 : opacity;
+                    }
+                    return a.properties._selected ? 1 : opacity;
+                });
                 for (var k = 0; k < filteredDistricts.length; k++) {
                     // console.log(filteredDistricts[k]);
                     if (d.properties.dist === filteredDistricts[k]) {
                         return "none";
                     }
                 }
-                return "#e3784a";
+                return "#e3784a";*/
 
 
             });
