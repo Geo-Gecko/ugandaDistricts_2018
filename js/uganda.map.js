@@ -503,7 +503,7 @@
                 for (var j = 0; j < dataset1.length ; j++) {
                     // console.log(dataset1);
                     // console.log(sliders[j].__data__.key);
-                    header.push(sliders[i].__data__.values[0].FieldNames);
+                    header.push(sliders[i].__data__.key);
 
                     if (dataset1[j]["DNAME2016"]===d.properties.dist) {
                         // console.log(dataset1[i]);
@@ -808,7 +808,7 @@
             })
         }
 
-        d3.select("#d3-map-make-pdf").on("click", makePdf);
+        //d3.select("#d3-map-make-pdf").on("click", makePdf);
 
 
 
@@ -1346,9 +1346,7 @@
                 });*/
                 for (var k = 0; k < filteredDistricts.length; k++) {
                     // console.log(filteredDistricts[k]);
-                    if (d.properties.dist === clicked[0][0].__data__.properties.dist)  {
-                        return "#41b6c4";
-                    }else if (d.properties.dist === filteredDistricts[k]) {
+                    if (d.properties.dist === filteredDistricts[k]) {
                         return "none";
                     }
                 }
@@ -1388,7 +1386,7 @@
             for (var j = 0; j < dataset1.length ; j++) {
                 // console.log(dataset1);
                 // console.log(sliders[j].__data__.key);
-                header.push(sliders[i].__data__.values[0].FieldNames);
+                header.push(sliders[i].__data__.key);
 
                 if (dataset1[j][sliders[i].__data__.values[0].FieldNames]) {
                     // console.log(dataset1[i]);
