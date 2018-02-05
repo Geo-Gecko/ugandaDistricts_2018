@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Uganda Info Portal</title>
-    <link href="./css/bootstrap.min.css" rel="Stylesheet" type="text/css">
+    <script src='./js/jquery.min.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400" rel="stylesheet">
     <link href="./css/uganda.map.css" rel="Stylesheet" type="text/css">
     <link href="./css/nouislider.css" rel="Stylesheet" type="text/css">
@@ -14,9 +14,13 @@
     <script src="./js/nouislider.js"></script>
     <script src="./js/saveSvgAsPng.js"></script>
     <script src="./js/pdf.js"></script>
+    <link href="./css/bootstrap.min.css"></link>
+    <script src="./js/sidemenu.js"></script>
+    <link href="./css/sidemenu.css" rel="Stylesheet" type="text/css">
 </head>
 
 <body>
+
 <div id="overlay-content">
     This product is in beta <br>
     For <br>
@@ -52,26 +56,37 @@
             </div>
         </div>
     </div>
-
-    <div class="right-panel col-md-8 col-sm-8">
+    <div class="right-panel col-md-8 col-sm-8"  id = "right">
         <p class="custom-list-header" style="width:100%">Filters <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
-        <div class="head col-md-2 col-sm-2" style="left: 10px;">
-            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Districts </p>
-            <p id="district-count" class="custom-count">0</p>
-        </div>
-        <div class=" head col-md-2 col-sm-2" style="left: 8px;">
-            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Population </p>
-            <p id="population-count" class="custom-count">0</p>
-        </div>
-        <div class="head col-md-2 col-sm-2" style="left: 5px;">
-            <p class="custom-count-header" style="height:23.2px;  font-size: 16px;">Households </p>
-            <p id="household-count" class="custom-count">0</p>
-        </div>
+        <span class="head col-md-4 col-sm-4" style="left: 10px;"> 
+           <div>
+            <span class="custom-count-header" style="height:23.2px; font-size: 16px;">
+               <span>Districts </span>
+            </span>
+            <span class="custom-count-header" style="height:23.2px; font-size: 16px;">
+               <span>Population </span>
+            </span>         
+            <span class="custom-count-header" style="height:23.2px; font-size: 16px;">
+               <span>Households</span>
+            </span>   
+           </div>
+           <div style = "width:100%;">        
+            <div class="custom-count">
+              <span  id="district-count">0</span>
+            </div>
+            <div class="custom-count">
+                <span id="population-count">0</span>
+            </div>
+            <div class="custom-count">
+                <span id="household-count">0</span>
+            </div>
+           </div>
+        </span>
         <p class="custom-list-header"><span style="border-radius: 10px;"><i
                 id="d3-map-refresh">Reset Filters </i></span>
             <span style="border-radius: 10px;"><i id="d3-map-make-pdf">Download PDF </i></span></p>
 
-        <div class="col-md-12">
+        <div class="col-md-12" style = "overflow-y:auto;" id = "filters">
                 <p class="custom-list-header">Socio-Economic <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
                     <div id="socio-economic-list" class="custom-list"></div>
             <p class="custom-list-header">Education <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
@@ -94,7 +109,7 @@
 </div>
 <div class="row" style="margin:0px;">
     <!--<div class="bottom-panel col-md-12" style="padding: 0 5px;">  <span class="glyphicon glyphicon-menu-down"></span>-->
-    <div class="left-panel col-md-2">
+    <div class="left-panel col-md-2" id = "left">
 
         <div class="menu-panel">
 
@@ -104,15 +119,23 @@
                     <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
                     <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
                     <div id="distStats">
-                        <div class="head col-md-2 col-sm-2" style="width: 47.5%;">
-                            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Population </p>
-                            <p id="dist-population-count" class="custom-count" style="background-color: #1984e3;">0</p>
-                        </div>
-                        <div class=" head col-md-2 col-sm-2" style="width: 47.5%;">
-                            <p class="custom-count-header" style="height:23.2px; font-size: 16px;">Households </p>
-                            <p id="dist-household-count" class="custom-count" style="background-color: #1984e3;">0</p>
-                        </div>
-                    </div>
+                      <div>
+                        <span class="custom-count-header" style="height:23.2px; font-size: 16px;width: 47.5%;">
+                           <span>Population </span>
+                        </span>
+                        <span class="custom-count-header" style="height:23.2px; font-size: 16px;width: 47.5%;">
+                          <span>Households</span>
+                        </span>   
+                      </div>
+                      <div style = "width:100%;">        
+                         <div class="custom-count" style="width: 47.5%;background-color: #1984e3;" >
+                           <span id="dist-population-count">0</span>
+                         </div>
+                          <div class="custom-count" style="width: 47.5%;background-color: #1984e3;">
+                              <span  id="dist-household-count">0</span>
+                          </div>
+                       </div>
+                     </div>
                 </div>
             </div>
 
@@ -134,7 +157,6 @@
 
 </div>
 
-<script src="./js/jquery.min.js"></script>
 <script>
     $("#distStats").hide();
     $.fn.center = function () {
@@ -154,11 +176,15 @@
     $("#overlay-content").show().center();
     $("#header").center();
 
-
     $("#overlay").on("click", function () {
         $("#overlay").fadeOut();
         $("#overlay-content").fadeOut();
     });
+
+    $('#right').BootSideMenu({side:"right", autoClose:true}); 
+//    $("#right").find(".row div").attr("class",""); 
+    $('.left-panel').BootSideMenu({side:"left", autoClose:true});  
+
 </script>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="

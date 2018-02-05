@@ -1,6 +1,7 @@
-;
+﻿var cbounds;
 (function (d3, $, queue, window) {
   'use strict';
+  $("#filters").css("height",$(window).height()-$("#filters").offset().top-10+"px")
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
   'use strict';
@@ -17,6 +18,8 @@
     var _selectedDataset;
     var dataset;
     var dataset1;
+    var country;
+    var zoom;
   queue()
     // .defer(d3.json, "./UgandaDistricts.geojson")//DNAME_06
     .defer(d3.json, "./data/UgandaDistricts.geojson") //dist
@@ -243,7 +246,7 @@
       document.body.clientHeight);
     if (h > 540) {
       d3.select(".list-container").style("height", h + "px");
-      d3.select("#d3-map-wrapper").style("height", h + "px");
+      d3.select("#d3-map-container").style("height", h + "px");
     }
     var w = (window.innerWidth ||
       document.documentElement.clientWidth ||
@@ -252,7 +255,7 @@
 
     var map = new L.Map("d3-map-container", {
         center: [1.367, 32.305],
-        zoom: 7,
+        zoom: 6,
         zoomControl: false
       });
 
@@ -278,7 +281,7 @@
                [-2.5,35.5]
             ]);
         map.options.maxZoom=12;
-        map.options.minZoom=7;
+        map.options.minZoom=6;
        /* map.on("moveend", function(d){
             var zoomlevel = map.getZoom()
             //console.log(zoomlevel);
@@ -333,9 +336,42 @@
     var ugandaPath;
     var domain = [+Infinity, -Infinity];
     var opacity = 0.7;
-    var wrapper = d3.select("#d3-map-wrapper");
-    var width = wrapper.node().offsetWidth || 960;
-    var height = wrapper.node().offsetHeight || 480;
+//    var wrapper = d3.select("#d3-map-wrapper");
+//    var width = wrapper.node().offsetWidth || 960;
+//    var height = wrapper.node().offsetHeight || 480;
+//      var width = $(window).width();
+//      var height = $(window).height()-100; 
+      var width = $(window).width();
+      var height = $(window).height()-25;  
+      $(".toggler").css("height",height+25);
+      $("#d3-map-container").css("width",width);
+      $("#d3-map-container").css("height",height);
+      $("#right").find(".toggler").append("<div id = 'rtitle'></div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>F</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>I</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>L</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>E</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>R</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+    var ht = $("#rtitle").height();
+    ht = (height - ht)/2;
+    $("#rtitle").css("margin-top",ht+"px")
+      $("#left").find(".toggler").append("<div id = 'ltitle'></div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>A</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>I</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>I</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>C</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+    var ht = $("#ltitle").height();
+    ht = (height - ht)/2;
+    $("#ltitle").css("margin-top",ht+"px")
+
     var color = d3.scale.linear().domain(domain) //http://bl.ocks.org/jfreyre/b1882159636cc9e1283a
       .interpolate(d3.interpolateHcl)
       .range([d3.rgb("#f7fcfd"), d3.rgb('#00441b')]); //#f597aa #a02842
@@ -368,7 +404,7 @@
         .attr("style", "pointer-events:all!important")
         .style("cursor", "pointer")
         .style("stroke", "#000")
-        .each(function (d) {
+        .each(function (d) { console.log(d);
             //console.log(d);
           d.properties.centroid = projection(d3.geo.centroid(d)); // ugandaCentroid = d.properties.centroid;
           // console.log(d, d.properties.centroid);
@@ -707,7 +743,15 @@
     //   "Countries": countriesOverlay
     // }).addTo(map);
     countries = ugandaGeoJson.features;
+    country = L.geoJson(ugandaGeoJson)
+    cbounds = country.getBounds();
     countriesOverlay.addTo(map);
+    setTimeout(function(){
+       zoom = map.getBoundsZoom(cbounds);
+       map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
+       map.fitBounds(cbounds);
+       map.invalidateSize();
+    },1000)  
 
 
 
@@ -1508,18 +1552,130 @@
 
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");
-      var width = wrapper.node().offsetWidth || 960;
-      var height = wrapper.node().offsetHeight || 480;
+//      var width = wrapper.node().offsetWidth || 960;
+//      var height = wrapper.node().offsetHeight || 480;
+      var width = $(window).width();
+      var height = $(window).height()-25;  
+      $(".toggler").css("height",height+25);
+      var ht = $("#rtitle").height();
+      ht = (height - ht)/2;
+      $("#rtitle").css("margin-top",ht+"px")
+
+      var ht = $("#ltitle").height();
+      ht = (height - ht)/2;
+      $("#ltitle").css("margin-top",ht+"px")
+
+      if ($("#right").width()+$("#left").width() > width-20)
+         {
+          if ($("#left").attr("data-status") =="opened")
+             {
+              $("#left").find(".toggler").trigger("click");
+             } 
+         }     
+      if (width < 400)
+         {  
+          $("#right").css("max-width","307px");
+          $("#right").css("min-width","307px");
+          $("#left").css("max-width","307px");
+          $("#left").css("min-width","307px");
+          if ($("#left").attr("data-status") =="opened")
+             {
+              $("#left").find(".toggler").trigger("click");
+             }
+          if ($("#right").attr("data-status") =="opened")
+             {
+              $("#right").find(".toggler").trigger("click");
+             }  
+         }   
+      else
+         {
+          $("#right").css("max-width","372px");
+          $("#right").css("min-width","372px");
+          $("#left").css("max-width","372px");
+          $("#left").css("min-width","372px");
+         }    
+      $("#d3-map-container").css("width",width);
+      $("#d3-map-container").css("height",height);
       if (width) {
-        d3.select("#d3-map-wrapper").select("svg")
+        d3.select("#d3-map-container").select("svg")
           .attr("viewBox", "0 0 " + width + " " + height)
           .attr("width", width)
           .attr("height", height);
       }
+     setTimeout(function(){
+        zoom = map.getBoundsZoom(cbounds); 
+        map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
+        map.fitBounds(cbounds);
+        map.invalidateSize();
+     },2000);
+
     });
+    var triggerclick = false;
+     $(document).on("click",".toggler",function(e){ 
+      if (triggerclick)
+         {
+          triggerclick = false;  
+          return;  
+         }
+      e.stopPropagation();
+      e.preventDefault(); 
+      if ($(window).width() < 400)
+         {  
+          setTimeout(function(){   
+             if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
+                {
+                 if ($("#right").width()+$("#left").width() > $(window).width()-20)
+                    {
+                     $("#left").find(".toggler").trigger("click");
+                    } 
+                }
+             else
+                {
+                }  
+          },500) 
+         } 
+      else
+         {
+          if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
+             {
+              if ($("#right").width()+$("#left").width() > $(window).width()-20)
+                 {
+                  if ($("#left").attr("data-status") =="opened")
+                     {
+                      $("#left").find(".toggler").trigger("click");
+                     } 
+                 }   
+             }
+         }
+     });
 
 
-
+      if ($(window).width() > 400)
+         {  
+          $("#right").css("max-width","372px");
+          $("#right").css("min-width","372px");
+          $("#left").css("max-width","372px");
+          $("#left").css("min-width","372px");
+          $("#left").find(".toggler").trigger("click");
+          $("#right").find(".toggler").trigger("click");
+          setTimeout(function(){   
+             if ($("#right").width()+$("#left").width() > $(window).width()-20)
+                {
+                 if ($("#left").attr("data-status") =="opened")
+                    {
+                     $("#left").find(".toggler").trigger("click");
+                    } 
+                } 
+          },1000)
+         } 
+      else
+         {
+          $("#left").find(".toggler").css("margin-top","-35px") 
+          $("#right").css("max-width","301px");
+          $("#right").css("min-width","301px");
+          $("#left").css("max-width","303px");
+          $("#left").css("min-width","303px");
+         }   
     } // ready
 
 
