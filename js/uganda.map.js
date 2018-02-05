@@ -343,8 +343,34 @@
 //      var height = $(window).height()-100; 
       var width = $(window).width();
       var height = $(window).height()-25;  
+      $(".toggler").css("height",height+25);
       $("#d3-map-container").css("width",width);
       $("#d3-map-container").css("height",height);
+      $("#right").find(".toggler").append("<div id = 'rtitle'></div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>F</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>I</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>L</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>E</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>R</div>");
+      $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+    var ht = $("#rtitle").height();
+    ht = (height - ht)/2;
+    $("#rtitle").css("margin-top",ht+"px")
+      $("#left").find(".toggler").append("<div id = 'ltitle'></div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>A</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>I</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>I</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>C</div>");
+      $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
+    var ht = $("#ltitle").height();
+    ht = (height - ht)/2;
+    $("#ltitle").css("margin-top",ht+"px")
 
     var color = d3.scale.linear().domain(domain) //http://bl.ocks.org/jfreyre/b1882159636cc9e1283a
       .interpolate(d3.interpolateHcl)
@@ -1530,6 +1556,15 @@
 //      var height = wrapper.node().offsetHeight || 480;
       var width = $(window).width();
       var height = $(window).height()-25;  
+      $(".toggler").css("height",height+25);
+      var ht = $("#rtitle").height();
+      ht = (height - ht)/2;
+      $("#rtitle").css("margin-top",ht+"px")
+
+      var ht = $("#ltitle").height();
+      ht = (height - ht)/2;
+      $("#ltitle").css("margin-top",ht+"px")
+
       if ($("#right").width()+$("#left").width() > width-20)
          {
           if ($("#left").attr("data-status") =="opened")
@@ -1539,10 +1574,10 @@
          }     
       if (width < 400)
          {  
-          $("#right").css("max-width","305px");
-          $("#right").css("min-width","305px");
-          $("#left").css("max-width","305px");
-          $("#left").css("min-width","305px");
+          $("#right").css("max-width","307px");
+          $("#right").css("min-width","307px");
+          $("#left").css("max-width","307px");
+          $("#left").css("min-width","307px");
           if ($("#left").attr("data-status") =="opened")
              {
               $("#left").find(".toggler").trigger("click");
@@ -1636,10 +1671,10 @@
       else
          {
           $("#left").find(".toggler").css("margin-top","-35px") 
-          $("#right").css("max-width","305px");
-          $("#right").css("min-width","305px");
-          $("#left").css("max-width","305px");
-          $("#left").css("min-width","305px");
+          $("#right").css("max-width","301px");
+          $("#right").css("min-width","301px");
+          $("#left").css("max-width","303px");
+          $("#left").css("min-width","303px");
          }   
     } // ready
 

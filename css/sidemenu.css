@@ -119,8 +119,9 @@
       width: 20px;
       height: 48px;
       position: absolute;
-      top: 45%;
+      top: 0%;
       cursor: pointer;
+      background-color:red;
 }
 .sidebar-left > .toggler{
       -webkit-border-top-right-radius: 4px;

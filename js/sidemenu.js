@@ -70,7 +70,7 @@
 					$('#'+idToToggle).css('left', this_x);
 					$('#'+idToToggle).css('top', this_y);			
 				}else if(side=='right'){
-					this_x = $(this).width()+10;
+					this_x = $(this).width() + 10;
 					this_y = this_offset.top +1;
 					$('#'+idToToggle).css('right', this_x);
 					$('#'+idToToggle).css('top', this_y);			
@@ -137,7 +137,7 @@ function doAnimation(container, containerWidth, sidebarSide, sidebarStatus){
 			toggleArrow(toggler, "left");
 		}else if(sidebarSide=="right"){
 			container.animate({
-				right:- (containerWidth +2)
+				right:- (containerWidth+2)
 			});
 			toggleArrow(toggler, "right");
 		}
