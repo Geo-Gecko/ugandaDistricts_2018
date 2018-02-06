@@ -93,7 +93,7 @@ html {
     /*background-color: rgba(255,255,255,.9);*/
 }
 
-.panel-right.row-md-8 {
+.right-panel.row-md-8 {
     position: absolute;
     top: 300px;
     width: 150px;
@@ -106,12 +106,13 @@ html {
     background-color: rgba(255,255,255,1);
 }
 
-.right-panel.col-md-8.col-sm-8 {
+.right-panel {
     position: absolute;
+    top: 10%;
+    bottom:10%;
     padding: 8px 4px !important;
     right: 5px;
     z-index: 500;
-    height: 100%;
     min-width: 320px;
     max-width: 320px;
 }
@@ -313,7 +314,6 @@ p.custom-list-header .glyphicon {
     margin:0;
     text-align: center;
     font-size: 10px;
-    height: auto;
     overflow-y: hidden;
     /*background-color: rgba(245, 245, 245, 0.7);*/
     color: #52595e;

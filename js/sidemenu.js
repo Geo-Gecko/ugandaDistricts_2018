@@ -31,7 +31,7 @@
 //	newCode += "<div class=\"col-xs-2 col-sm-2 col-md-2 col-lg1-2\" data-side=\""+side+"\">\n"+ oldCode+" </div>\n";
 		newCode += "</div>";
 		newCode += "<div class=\"toggler\">\n";
-		newCode += "	<span class=\"glyphicon glyphicon-chevron-right\">&nbsp;</span> <span class=\"glyphicon glyphicon-chevron-left\">&nbsp;</span>\n";
+		newCode += "	<span class=\"glyphicon glyphicon-chevron-right\"><!--&nbsp;--></span> <span class=\"glyphicon glyphicon-chevron-left\"><!--&nbsp;--></span>\n";
 		newCode += "</div>\n";
 
 		this.html(newCode);

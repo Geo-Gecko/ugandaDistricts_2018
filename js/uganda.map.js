@@ -18,6 +18,7 @@
     var _selectedDataset;
     var dataset;
     var dataset1;
+    var filteredDistricts = [];
     var country;
     var zoom;
   queue()
@@ -36,8 +37,6 @@
     global.selectedTheme = []; // ID
     global.selectedFilter = []; //undefined; //[]; // ID
     global.districtCount;
-    global.themeCount;
-    global.filterCount;
     global.currentEvent;
   // global.needRefreshDistrict;
 
@@ -54,7 +53,7 @@
       global.selectedIp = [];
       global.selectedOp = [];
 
-      _selectedDataset = dataset;
+      _selectedDataset = dataset1;
   }
 
     function ready(error, ugandaGeoJson, washCSV, filterList) {
@@ -404,7 +403,7 @@
         .attr("style", "pointer-events:all!important")
         .style("cursor", "pointer")
         .style("stroke", "#000")
-        .each(function (d) { console.log(d);
+        .each(function (d) {
             //console.log(d);
           d.properties.centroid = projection(d3.geo.centroid(d)); // ugandaCentroid = d.properties.centroid;
           // console.log(d, d.properties.centroid);
@@ -470,28 +469,36 @@
         })
         .on("click", function (d) {
             // console.log(d);
+            //console.log(d3.select('#left'));
+            if ($("#left").attr("data-status") =="closed")
+            {
+                $("#left").find(".toggler").trigger("click");
+            }
 
-            var selectedDistrict = d3.select(this);
-            console.log(selectedDistrict);
+
 
             var needRemove = $(d3.select(this).node()).hasClass("d3-active"); //d3.select(this).attr("class");//d3-active
             d3.select(this).classed("d3-active", !needRemove).style("fill", needRemove ? "#E3784A" :
                 "#41b6c4");
-            console.log(d.properties);
-
-            // if (d.properties.dist === c.key) {
-            //     //console.log(a);
-            //     //console.log(c);
-            //     a.properties._selected = !needRemove;
-            //     return a.properties._selected ? 1 : opacity;
-            // }
+            // console.log(d.properties);
 
             var header = d3.select("#districtHeader");
             var str = "National Average versus " + d.properties.DNAME_06 + " district";
 
             header.html(str);
 
+            ugandaPath.style("fill", function (d) {
+                for (var k = 0; k < filteredDistricts.length; k++) {
+                    // console.log(filteredDistricts[k]);
+                    if (d.properties.dist === filteredDistricts[k]) {
+                        return "none";
+                    }
+                }
+                return "#e3784a";
+            });
             d3.select(this).style("fill", "#41b6c4");
+
+
 
             d3.select("#dist-population-count").text((+(d.properties._Population_2014[0].key)).toLocaleString());
             d3.select("#dist-household-count").text((+(d.properties._Household_2014[0].key)).toLocaleString());
@@ -792,15 +799,15 @@
         /*$(".custom-list-header").siblings(".custom-list").addClass('collapsed');
               $("#district-list.custom-list").removeClass('collapsed');
                */
-      global.selectedDistrict = [];
-      ugandaPath.style("opacity", function (a) {
-        a.properties._selected = false;
-        return 0.7;
-      });
-      d3.selectAll('.labels').style("opacity", 1);
-      d3.select("#district-list").selectAll("p").style("background", "transparent");
-      d3.select("#theme-list").selectAll("p").style("background", "transparent")
-      updateLeftPanel(districtList, dataset1);
+      // global.selectedDistrict = [];
+      // ugandaPath.style("opacity", function (a) {
+      //   a.properties._selected = false;
+      //   return 0.7;
+      // });
+      // d3.selectAll('.labels').style("opacity", 1);
+      // d3.select("#district-list").selectAll("p").style("background", "transparent");
+      // d3.select("#theme-list").selectAll("p").style("background", "transparent")
+      //updateLeftPanel(districtList, dataset1);
       // updateLeftPanel(districtList, [], [], [], dataset);
       refreshCounts();
     }
@@ -1180,11 +1187,12 @@
             _energyList.exit().remove();
             //console.log(educationList);
         }
-
+    }
         d3.select("#education-list").selectAll("p").append("div").attr("class", "sliders");
         d3.select("#socio-economic-list").selectAll("p").append("div").attr("class", "sliders");
         d3.select("#wash-and-health-list").selectAll("p").append("div").attr("class", "sliders");
         d3.select("#energy-list").selectAll("p").append("div").attr("class", "sliders");
+       // console.log(1);
       //console.log(createSliders)
         // createSliders.append("div")
         //     .attr("class", "sliders");
@@ -1327,11 +1335,12 @@
             // console.log(fieldName);
 
             var sliderData = [fieldName].concat([realRange]);
-            // console.log(sliderData);
+            //console.log(sliderData);
             //console.log(dataset1);
 
 
             var filtered = [];
+
             var filteredPop = 0;
             var filteredHH = 0;
 
@@ -1353,7 +1362,7 @@
                     }
                 }
             }
-            var filteredDistricts = filtered.filter(function (item, pos) {
+            filteredDistricts = filtered.filter(function (item, pos) {
                 return filtered.indexOf(item) === pos;
             });
             //console.log(sliders);
@@ -1377,8 +1386,8 @@
 
 
                 ugandaPath.style("fill", function (d) {
-                    var clicked = d3.select(".d3-active");
-                    console.log(clicked[0][0].__data__.properties.dist);
+                    //var clicked = d3.select(".d3-active");
+                    //console.log(clicked[0][0].__data__.properties.dist);
                 // console.log(a);
                     /*if (a.properties. === c.key) {
                         //console.log(a);
@@ -1413,8 +1422,8 @@
                 }
             }
             // console.log(activeFilters);
-            var active = [activeFilters].concat([filterValues]);
-            console.log(active);
+            //var active = [activeFilters].concat([filterValues]);
+            // console.log(active);
 
         }
 
@@ -1548,7 +1557,7 @@
 
 
 
-    }
+
 
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");

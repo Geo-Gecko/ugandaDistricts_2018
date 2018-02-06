@@ -116,12 +116,12 @@
       background-clip: padding-box;
       border: 1px solid #ccc;
       border: 1px solid rgba(0, 0, 0, .15);
-      width: 20px;
+      width: 40px;
       height: 48px;
       position: absolute;
       top: 0%;
       cursor: pointer;
-      background-color:red;
+      background: rgba(227, 120, 74, 0.7);
 }
 .sidebar-left > .toggler{
       -webkit-border-top-right-radius: 4px;
@@ -133,7 +133,7 @@
       border-left: 1px solid #fff;
       -webkit-box-shadow: 1px 0px 8px rgba(0, 0, 0, .175);
       box-shadow: 1px 0px 8px rgba(0, 0, 0, .175);
-      right: -20px;
+      right: -40px;
 } 
 
 .sidebar-left > .toggler > span{
@@ -154,7 +154,7 @@
       border-right: 1px solid #fff;
       -webkit-box-shadow: -1px 0px 8px rgba(0, 0, 0, .175);
       box-shadow: -1px 0px 8px rgba(0, 0, 0, .175);      		
-      left: -20px;
+      left: -40px;
 } 
 
 .sidebar-right > .toggler > span{
