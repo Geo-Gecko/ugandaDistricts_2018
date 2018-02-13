@@ -45,15 +45,9 @@
       d3.select("#district-count").text(global.districtCount);
       d3.select("#population-count").text(global.populationCount.toLocaleString());
       d3.select("#household-count").text(global.householdCount.toLocaleString());
-      // global.selectedDistrict = [];
-      global.selectedSettlement = []; //undefined; //[];
-      global.selectedSector = [];
-      global.selectedAgency = [];
-      global.selectedUn = [];
-      global.selectedIp = [];
-      global.selectedOp = [];
 
       _selectedDataset = dataset1;
+      console.log(_selectedDataset);
   }
 
     function ready(error, ugandaGeoJson, washCSV, filterList) {
@@ -254,7 +248,7 @@
 
     var map = new L.Map("d3-map-container", {
         center: [1.367, 32.305],
-        zoom: 6,
+        zoom: 7,
         zoomControl: false
       });
 
@@ -341,8 +335,13 @@
 //      var width = $(window).width();
 //      var height = $(window).height()-100; 
       var width = $(window).width();
-      var height = $(window).height()-25;  
+      var height = $(window).height();
       $(".toggler").css("height",height+25);
+        $("#right").find(".toggler").append("<div id='logo' style=\"position: relative; bottom: calc(-100% + 170px); left: -40px;\">\n" +
+            "                    <a href=\"https://www.geogecko.com/\" target=\"_blank\">\n" +
+            "                        <img src=\"./data/Logo.svg\" alt=\"Geo Gecko\" style=\"width:100%; height:100%;\">\n" +
+            "                    </a>\n" +
+            "            </div>");
       $("#d3-map-container").css("width",width);
       $("#d3-map-container").css("height",height);
       $("#right").find(".toggler").append("<div id = 'rtitle'></div>");
@@ -355,7 +354,8 @@
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#rtitle").height();
     ht = (height - ht)/2;
-    $("#rtitle").css("margin-top",ht+"px")
+        $("#rtitle").css("margin-top",ht+"px")
+
       $("#left").find(".toggler").append("<div id = 'ltitle'></div>");
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>T</div>");
@@ -431,7 +431,7 @@
             }
           });
         })
-        /*.on("mousemove", function (d) {
+        .on("mousemove", function (d) {
           var svg = d3.select(this.parentNode.parentNode.parentNode);
           var mouse = d3.mouse(svg.node()).map(function (d) {
             return parseInt(d);
@@ -440,12 +440,7 @@
           mouse[0] = mouse[0] + shift.translate[0] + shift.translate[0] * (shift.scale[0] - 1);
           mouse[1] = mouse[1] + shift.translate[1] + shift.translate[1] * (shift.scale[1] - 1);
           // console.log(sel, mouse);
-          var str = "<p><span>District:</span> <b>" + d.properties.DNAME_06 + "</b></p>"
-          if (d.properties._settlementList && d.properties._sectorList && d.properties._agencyList) {
-            str = str + "<p><span>Settlements:</span> <b>" + d.properties._settlementList.length + "</b></p>" +
-              "<p><span>Sectors:</span> <b>" + d.properties._sectorList.length + "</b></p>" +
-              "<p><span>Agencies:</span> <b>" + d.properties._agencyList.length + "</b></p>";
-          }
+          var str = "<p><b>" + d.properties.DNAME_06 + "</b><span> District</span></p>"
           tooltip.html(str);
           var box = tooltip.node().getBoundingClientRect() || {
             height: 0
@@ -453,10 +448,10 @@
           tooltip
             .classed("d3-hide", false)
             .attr("style", "left:" + (mouse[0] + 15) + "px;top:" + (mouse[1] < height / 2 ? mouse[1] : mouse[1] - box.height) + "px");
-        })*/
+        })
         .on("mouseover", function (d) {
           // d3.select(this).style("stroke", "#000")"fill", "#aaa");
-        //tooltip.classed("d3-hide", false);
+        tooltip.classed("d3-hide", false);
         })
         .on("mouseout", function (d) {
          /* d3.select(this).style("fill", function(d){
@@ -465,7 +460,7 @@
               var filterValue = +(d.properties._Population_2014[0].key);
               return filterValue ? color(filterValue) : "#ccc";
           });//"none");*/
-          //tooltip.classed("d3-hide", true);
+          tooltip.classed("d3-hide", true);
         })
         .on("click", function (d) {
             // console.log(d);
@@ -475,11 +470,6 @@
                 $("#left").find(".toggler").trigger("click");
             }
 
-
-
-            var needRemove = $(d3.select(this).node()).hasClass("d3-active"); //d3.select(this).attr("class");//d3-active
-            d3.select(this).classed("d3-active", !needRemove).style("fill", needRemove ? "#E3784A" :
-                "#41b6c4");
             // console.log(d.properties);
 
             var header = d3.select("#districtHeader");
@@ -487,6 +477,7 @@
 
             header.html(str);
 
+            // ugandaPath.style("opacity", opacity);
             ugandaPath.style("fill", function (d) {
                 for (var k = 0; k < filteredDistricts.length; k++) {
                     // console.log(filteredDistricts[k]);
@@ -497,6 +488,7 @@
                 return "#e3784a";
             });
             d3.select(this).style("fill", "#41b6c4");
+            d3.select(this).attr("opacity", 1);
 
 
 
@@ -506,12 +498,7 @@
             $("#distStats").show();
             var ugChart = d3.select(".statUG").selectAll("rect");
             // console.log(ugChart);
-            ugChart.attr("height", "20");/*function(d) {
-
-            })*/
-            /*var ugChartText = d3.select(".statUG").selectAll("text");
-            // console.log(ugChart);
-            ugChartText.attr("dy", "0");*/
+            ugChart.attr("height", "20");
 
             d3.selectAll(".districtLegend").remove();
 
@@ -568,13 +555,13 @@
             var chartDist = [headerList].concat([values]);
 
 
-            var valueLabelWidth = 40; // space reserved for value labels (right)
+            var valueLabelWidth = 10; // space reserved for value labels (right)
             var barHeight = 25; // height of one bar
             var barLabelWidth = 200; // space reserved for bar labels
             // var barLabelPadding = 5; // padding between bar and bar labels (left)
             var gridLabelHeight = 18; // space reserved for gridline labels
             var gridChartOffset = 3; // space between start of grid and first bar
-            var maxBarWidth = 190; // width of the bar with the max value
+            var maxBarWidth = 150; // width of the bar with the max value
 
 // accessor functions
 //             var barLabel = function(d) {  return d; };
@@ -730,12 +717,12 @@
                 }
             });
         })
-        .style("fill", function(d){
+       /* .style("fill", function(d){
             //console.log(color(d.properties._HH_Improved_Toilet_2014[0].key));
             //console.log(d.properties._HH_Improved_Toilet_2014[0].key);
             var filterValue = +(d.properties._Population_2014[0].key);
             return "#e3784a";
-        })//"none")
+        })//"none")*/
         .attr("class", function (d) {
           return "district district-" + d.properties.DNAME_06.replaceAll('[ ]', "_");
         });
@@ -750,15 +737,81 @@
     //   "Countries": countriesOverlay
     // }).addTo(map);
     countries = ugandaGeoJson.features;
-    country = L.geoJson(ugandaGeoJson)
+        countriesOverlay.addTo(map);
+    /*country = L.geoJson(ugandaGeoJson)
     cbounds = country.getBounds();
-    countriesOverlay.addTo(map);
+
     setTimeout(function(){
        zoom = map.getBoundsZoom(cbounds);
        map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
        map.fitBounds(cbounds);
        map.invalidateSize();
-    },1000)  
+    },1000)  ;*/
+
+        function addLegend(domain, color) {
+            var N = 4;
+            var step = Math.round((domain[1] - domain[0]) / N);
+            var array = [domain[0] + Math.round(step - step / 2), domain[0] + Math.round(step * 2 - step / 2), domain[0] + Math.round(step * 3 - step / 2), domain[0] + Math.round(step * 4 - step / 2)];
+            var arrayLabel = [domain[0].toString() + " - " + (domain[0] + step).toString(), (domain[0] + step + 1).toString() + " - " + (domain[0] + step * 2).toString(), (domain[0] + step * 2 + 1).toString() + " - " + (domain[0] + step * 3).toString(), (domain[0] + step * 3 + 1).toString() + " - " + domain[1].toString()];
+
+            var legend = d3.selectAll('.c3-legend-item');
+            var legendSvg = d3.select('#legend')
+                .append('svg')
+                .attr('width', 150)
+                .attr('height', 150);
+            legend.each(function () {
+                svg.node().appendChild(this);
+            });
+
+            var legendX = 0;
+            var legendDY = 20;
+            legendSvg.selectAll('.legend-rect')
+                .data(array)
+                .enter()
+                .append('rect')
+                .attr('class', 'legend-rect')
+                .attr("x", legendX)
+                .attr("y", function (d, i) {
+                    return (i + 1) * legendDY;
+                })
+                .attr("width", 20)
+                .attr("height", 20)
+                .style("stroke", "black")
+                .style("stroke-width", 0)
+                .style("fill", function (d) {
+                    return color(d);
+                });
+            //the data objects are the fill colors
+
+            legendSvg.selectAll('.legend-text')
+                .data(array)
+                .enter()
+                .append('text')
+                .attr('class', 'legend-text')
+                .attr("x", legendX + 25)
+                .attr("y", function (d, i) {
+                    return (i) * legendDY + 25;
+                })
+                .attr("dy", "0.8em") //place text one line *below* the x,y point
+                .text(function (d, i) {
+                    return arrayLabel[i];
+                });
+
+            legendSvg.selectAll('.legend-title')
+                .data(["Number of Agencies"])
+                .enter()
+                .append('text')
+                .attr('class', 'legend-title')
+                .attr("x", legendX)
+                .attr("y", 0)
+                .attr("dy", "0.8em") //place text one line *below* the x,y point
+                .text(function (d, i) {
+                    return d;
+                });
+
+        }
+
+        addLegend(domain, color);
 
 
 
@@ -795,20 +848,22 @@
 
 
     function refreshMap() {
-      // ugandaPath.style("opacity", 1);
-        /*$(".custom-list-header").siblings(".custom-list").addClass('collapsed');
-              $("#district-list.custom-list").removeClass('collapsed');
-               */
-      // global.selectedDistrict = [];
-      // ugandaPath.style("opacity", function (a) {
-      //   a.properties._selected = false;
-      //   return 0.7;
-      // });
-      // d3.selectAll('.labels').style("opacity", 1);
-      // d3.select("#district-list").selectAll("p").style("background", "transparent");
-      // d3.select("#theme-list").selectAll("p").style("background", "transparent")
-      //updateLeftPanel(districtList, dataset1);
-      // updateLeftPanel(districtList, [], [], [], dataset);
+        var header = d3.select("#districtHeader");
+        var str = "National Average";
+        header.html(str);
+
+        d3.selectAll(".districtLegend").remove();
+        d3.select(".statDist").remove();
+
+        $("#distStats").hide();
+
+        ugandaPath.style("fill", "e3784a");
+        console.log(sliders);
+
+        for (var i = 0; i < sliders.length; i++) {
+            // sliders[i].noUiSlider.set([0, 100]);
+            sliders[i].noUiSlider.reset();
+        }
       refreshCounts();
     }
     d3.select("#d3-map-refresh").on("click", refreshMap);
@@ -827,10 +882,10 @@
             document.getElementById('d3-map-make-pdf').appendChild(spinner.el);
 
             var filters = [];
-            if (global.selectedDistrict.length > 0) {
+            if (sliders.length > 0) {
                 filters.push({"name": "District", "values": global.selectedDistrict})
             }
-            if (global.selectedSettlement.length > 0) {
+           /* if (global.selectedSettlement.length > 0) {
                 filters.push({"name": "Settlements", "values": global.selectedSettlement})
             }
             if (global.selectedSector.length > 0) {
@@ -838,19 +893,19 @@
             }
             if (global.selectedAgency.length > 0) {
                 filters.push({"name": "Agency", "values": global.selectedAgency})
-            }
+            }*/
             //console.log(_selectedDataset);
             var $xhr = $.ajax({
                 type: "HEAD",
-                url: "https://ugandarefugees.org/wp-content/uploads/Map5_T4.csv?GD_NONCE",
+                url: "./data/WASH_HEALTH.csv",
             }).done(function () {
                 var lastModified = new Date($xhr.getResponseHeader("Last-Modified"));
                 basemap.on("load", setTimeout(function(){console.log("all visible tiles have been loaded...");
                     generatePdf(map, _selectedDataset, filters, lastModified, function () {
-                        map.setMaxBounds([
+                        /*map.setMaxBounds([
                             [4.5,29.5],
                             [-1.5,34.5]
-                        ]);
+                        ]);*/
                         $("#d3-map-make-pdf").removeClass('disabled');
                         spinner.stop();
                     });
@@ -859,7 +914,7 @@
             })
         }
 
-        //d3.select("#d3-map-make-pdf").on("click", makePdf);
+        d3.select("#d3-map-make-pdf").on("click", makePdf);
 
 
 
@@ -1260,7 +1315,7 @@
                 format: {
                     to: function (value) {
                         // console.log(value);
-                        return value.toFixed(2) + '%';
+                        return value.toFixed(0) + '%';
                     },
                     from: function (value) {
                         return value.replace('%', '');
@@ -1404,9 +1459,19 @@
                     }
                 }
                 return "#e3784a";
+                });
+
+                    var header = d3.select("#districtHeader");
+                    var str = "National Average";
+                    header.html(str);
+
+                    d3.selectAll(".districtLegend").remove();
+                    d3.select(".statDist").remove();
+
+                    $("#distStats").hide();
 
 
-            });
+
 
 
             //console.log(sliderData);
@@ -1460,13 +1525,13 @@
         // console.log(values);
         var chartData = [headerList].concat([values]);
 
-        var valueLabelWidth = 40; // space reserved for value labels (right)
+        var valueLabelWidth = 10; // space reserved for value labels (right)
         var barHeight = 25; // height of one bar
         var barLabelWidth = 200; // space reserved for bar labels
         var barLabelPadding = 5; // padding between bar and bar labels (left)
         var gridLabelHeight = 18; // space reserved for gridline labels
         var gridChartOffset = 3; // space between start of grid and first bar
-        var maxBarWidth = 190; // width of the bar with the max value
+        var maxBarWidth = 150; // width of the bar with the max value
 
 // accessor functions
         var barLabel = function(d) {  return d; };
@@ -1549,6 +1614,15 @@
             .style('fill', 'white')
             .text("National Averages");
 
+
+
+        /*var img1;
+        html2canvas("#filters").then(function(canvas) {
+            img1 = canvas.toDataURL('image/png')
+        });
+        console.log(img1);*/
+
+
         //http://jsfiddle.net/hibbard_eu/5y9zn6p5/
         //http://jsfiddle.net/jayblanchard/nBdkU/
         //https://codepen.io/paulobrien/pen/AByuk
@@ -1565,6 +1639,7 @@
 //      var height = wrapper.node().offsetHeight || 480;
       var width = $(window).width();
       var height = $(window).height()-25;  
+      // console.log(width, height);
       $(".toggler").css("height",height+25);
       var ht = $("#rtitle").height();
       ht = (height - ht)/2;
@@ -1574,7 +1649,7 @@
       ht = (height - ht)/2;
       $("#ltitle").css("margin-top",ht+"px")
 
-      if ($("#right").width()+$("#left").width() > width-20)
+      if ($("#right").width()+$("#left").width() > width-40)
          {
           if ($("#left").attr("data-status") =="opened")
              {
@@ -1583,10 +1658,10 @@
          }     
       if (width < 400)
          {  
-          $("#right").css("max-width","307px");
-          $("#right").css("min-width","307px");
-          $("#left").css("max-width","307px");
-          $("#left").css("min-width","307px");
+          $("#right").css("width","80%");
+          // $("#right").css("min-width","307px");
+          $("#left").css("width","80%");
+          // $("#left").css("min-width","307px");
           if ($("#left").attr("data-status") =="opened")
              {
               $("#left").find(".toggler").trigger("click");
@@ -1611,12 +1686,12 @@
           .attr("width", width)
           .attr("height", height);
       }
-     setTimeout(function(){
+     /*setTimeout(function(){
         zoom = map.getBoundsZoom(cbounds); 
         map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
         map.fitBounds(cbounds);
         map.invalidateSize();
-     },2000);
+     },2000);*/
 
     });
     var triggerclick = false;
@@ -1633,7 +1708,7 @@
           setTimeout(function(){   
              if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
                 {
-                 if ($("#right").width()+$("#left").width() > $(window).width()-20)
+                 if ($("#right").width()+$("#left").width() > $(window).width()-40)
                     {
                      $("#left").find(".toggler").trigger("click");
                     } 
@@ -1647,7 +1722,7 @@
          {
           if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
              {
-              if ($("#right").width()+$("#left").width() > $(window).width()-20)
+              if ($("#right").width()+$("#left").width() > $(window).width()-40)
                  {
                   if ($("#left").attr("data-status") =="opened")
                      {
@@ -1668,7 +1743,7 @@
           $("#left").find(".toggler").trigger("click");
           $("#right").find(".toggler").trigger("click");
           setTimeout(function(){   
-             if ($("#right").width()+$("#left").width() > $(window).width()-20)
+             if ($("#right").width()+$("#left").width() > $(window).width()-40)
                 {
                  if ($("#left").attr("data-status") =="opened")
                     {

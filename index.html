@@ -17,12 +17,13 @@
     <link href="./css/bootstrap.min.css"></link>
     <script src="./js/sidemenu.js"></script>
     <link href="./css/sidemenu.css" rel="Stylesheet" type="text/css">
+    <script src="js/html2canvas.min.js"></script>
+    <script src="js/jquery.plugin.html2canvas.js"></script>
 </head>
 
 <body>
 
 <div id="overlay-content">
-    This product is in beta <br>
     For <br>
     -tailored solutions <br>
     -additional indicators <br>
@@ -31,9 +32,9 @@
 
     please contact <a href="info@geogecko.com" target="_top">info@geogecko.com</a>
 
-    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; left:50%; top: 50%">
+    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; background-color: rgba(245, 245, 245, 0.7); width: 80%; left:50%; top: 50%">
         <a href="https://www.geogecko.com/" target="_blank">
-            <img src="./data/Logo.svg" alt="Geo Gecko" style="width:261px; height:66px;">
+            <img src="./data/Logo_Full.svg" alt="Geo Gecko" style="width:261px; height:66px;">
         </a>
     </div>
 
@@ -48,11 +49,20 @@
         </div>
     </div>-->
 
-    <div class="top-panel col-md-8 col-sm-8">
+    <div class="top-panel col-md-8">
         <div class="title-panel col-md-12">
-            <div id="header-text">
-                <p><span>Data <br> McDataface <small><i class="glyphicon glyphicon-info-sign"></i></small><br></span>
+            <div id="header-text" style="margin: auto;">
+                <p><span>Data McDataface <span style="font-size: x-small"><i class="glyphicon glyphicon-info-sign"></i></span>
+                </span>
                 </p>
+
+            <!--<div style="float:right; margin: auto;">
+                <span>
+                    <a href="https://www.geogecko.com/" target="_blank">
+                        <img src="./data/Logo.svg" alt="Geo Gecko" style="width:100%; height:100%;">
+                    </a>
+                </span>
+            </div>-->
             </div>
         </div>
     </div>
@@ -97,11 +107,11 @@
                     <div id="energy-list" class="custom-list"></div>
 
             <p class="custom-list-header"><!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
-            <div class="custom-list" style="margin: auto; left:50%; top: 50%">
+            <!--<div class="custom-list" style="margin: auto; left:50%; top: 50%">
                 <a href="https://www.geogecko.com/" target="_blank">
                 <img src="./data/Logo.svg" alt="Geo Gecko" style="width:261px; height:66px;">
                 </a>
-            </div>
+            </div>-->
         </div>
 
     </div>
@@ -113,10 +123,11 @@
 
         <div class="menu-panel">
 
+            <svg>
             <div class="list-container">
                 <div class="col-md-12">
                     <p id="districtHeader" class="custom-list-header">National Average </p>
-                    <div id="statistics-list" class="custom-list" style="top:10px; height: 680px;"></div>
+                    <div id="statistics-list" class="custom-list" style="top:10px;"></div>
                     <div id="statistics-legend" class="custom-list" style = "overflow: hidden; height: 50px;"></div>
                     <div id="distStats">
                       <div>
@@ -128,16 +139,17 @@
                         </span>   
                       </div>
                       <div style = "width:100%;">        
-                         <div class="custom-count" style="width: 47.5%;background-color: #1984e3;" >
+                         <div class="custom-count" style="width: 47.5%;background-color: #41B6C4;" >
                            <span id="dist-population-count">0</span>
                          </div>
-                          <div class="custom-count" style="width: 47.5%;background-color: #1984e3;">
+                          <div class="custom-count" style="width: 47.5%;background-color: #41B6C4;">
                               <span  id="dist-household-count">0</span>
                           </div>
                        </div>
                      </div>
                 </div>
             </div>
+            </svg>
 
 
         </div>
@@ -148,7 +160,7 @@
         <div id="d3-map-container">
             <div style="background:#f5f5f5;height:24px; position:absolute; top:0px; width:100%;">
                 <!--<p id="d3-map-make-pdf">Download PDF</p>-->
-                <div id="legend"></div>
+              <!--  <div id="legend"></div>-->
             </div>
             <div id="d3-map-wrapper"></div>
         </div>

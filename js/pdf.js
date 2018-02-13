@@ -1,13 +1,11 @@
 function _printPageHeader(doc, date) {
 	doc.setFontSize(32);
-	doc.text(4, 12, 'Who');
-	doc.text(4, 25, 'What');
-	doc.text(4, 38, 'Where (3W)');
+	doc.text(4, 12, 'Data McDataface');
 	doc.setFontSize(12);
 	var dy = 5;
-	texts = ['An export from', 'ugandarefugees.org', 'on ' + new Date().toDateString(),
+	texts = ['Exported', 'on ' + new Date().toDateString(),
 		'Data updated as of', date.toDateString(),
-		'', 'More information from', 'khalifno@unhcr.org'];
+		'', 'For inquiries', 'info@geogecko.com'];
 	texts.forEach(function (text, index) {
 		doc.text(text, 205, 6 + index * dy, 'right');
 	})
@@ -73,7 +71,7 @@ function _makeMapImage(map, callback) {
 				document.body.appendChild(imageEl);
 
 				makeRectangularCanvas(canvas, function (canvas) {
-					var legend = document.querySelector('#legend > svg');
+					var legend = document.querySelector('.menu-panel > svg');
 					svgAsPngUri(legend, {}, function (legendUri) {
 						callback(canvas, legendUri);
 					});
@@ -86,8 +84,30 @@ function _makeMapImage(map, callback) {
 function generatePdf(map, dataset, filters, lastModified, callback) {
 	var IMAGE_SIZE = 170;
 	var DOC_WIDTH = 210;
+    var img1;
+    var img2;
 
-	_makeMapImage(map, function (canvas, legendUri) {
+    var toPrint = document.getElementsByClassName('right-panel');
+    var toPrint1 = document.getElementsByClassName('left-panel');
+    html2canvas(toPrint, {
+        useCORS: true,
+        allowTaint: true,
+        transform: scale(2, 2),
+        onrendered: function( canvas ) {
+            img1 = canvas.toDataURL('image/png');
+        }
+    });
+    html2canvas(toPrint1, {
+        useCORS: true,
+        allowTaint: true,
+        transform: scale(2, 2),
+        onrendered: function( canvas ) {
+            img2 = canvas.toDataURL('image/png');
+        }
+    });
+
+
+    _makeMapImage(map, function (canvas, legendUri) {
 		var doc = new jsPDF();
 		var ratio = canvas.height / canvas.width;
 
@@ -99,15 +119,18 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
 		var width = IMAGE_SIZE;
 		var height = IMAGE_SIZE * ratio;
 		doc.addImage(image, 'PNG', x, y, width, height, 'map', 'fast');
-		doc.addImage(legendUri, 'PNG', x + 5, y + 5, 35, 35, 'legend', 'fast');
 
 		filters.forEach(function (filter, index) {
 			_printFilter(doc, filter, 5 + index * 50, 230);
 		});
 
 		doc.addPage();
+        doc.addImage(img1, 'PNG', x, y, width/2 , height, 'legend', 'fast');
+        doc.addPage();
+        doc.addImage(img2, 'PNG', x, y, width , height*2, 'legend1', 'fast');
 
-		var columns = [
+
+		/*var columns = [
 			{ title: 'District Name', dataKey: 'District' },
 			{ title: 'Actor Name', dataKey: 'Actor Name' },
 			{ title: 'Settlement Name', dataKey: 'Settlement Name' },
@@ -120,7 +143,7 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
 				_printPageHeader(doc, lastModified);
 			}
 		});
-
+*/
 		callback();
 		doc.save();
 	})

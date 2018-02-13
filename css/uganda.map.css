@@ -34,6 +34,7 @@ html {
     z-index:1002;
 }
 
+
 #header-text p {
     text-align: center;
     font-size: 28px;
@@ -45,13 +46,13 @@ html {
 }
 
 #header-text span {
-    background-color: #e3784a;
-    padding: 0 14px 0 8px;
-    margin: 0px 0 1px 0;
+    /*background-color: #e3784a;*/
+    /*padding: 0 14px 0 8px;*/
+    /*margin: 0px 0 1px 0;*/
 }
 
 #header-text {
-    line-height: 35px;
+    line-height: 0px;
 }
 
 .label {
@@ -81,9 +82,13 @@ html {
     /*background-color: rgba(255,255,255,.9);*/
 }
 
-.top-panel.col-md-8.col-sm-8 {
+.top-panel.col-md-8 {
+    background: rgba(227, 120, 74, 0.7);
+    height: 5%;
+    top: 0px;
+    left: 0px;
     width: 100%;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     position: absolute;
     z-index: 500;
     /*left: 760px;*/
@@ -93,6 +98,7 @@ html {
     /*background-color: rgba(255,255,255,.9);*/
 }
 
+/*
 .right-panel.row-md-8 {
     position: absolute;
     top: 300px;
@@ -101,20 +107,21 @@ html {
     right: 50px;
 
 }
+*/
 
 .right-panel {
     background-color: rgba(255,255,255,1);
 }
 
+
 .right-panel {
     position: absolute;
-    top: 10%;
-    bottom:10%;
     padding: 8px 4px !important;
     right: 5px;
+    top: 5%;
     z-index: 500;
     min-width: 320px;
-    max-width: 320px;
+    /*max-width: 320px;*/
 }
 
 p.custom-count-header {
@@ -186,9 +193,10 @@ div.custom-count {
     position: absolute;
     padding: 8px 4px !important;
     left: 5px;
+    top: 5%;
     z-index: 500;
     min-width: 320px;
-    max-width: 320px;
+    /*max-width: 320px;*/
 }
 
 .left-panel .col-md-12 {
@@ -269,8 +277,6 @@ div.d3-tooltip {
     opacity: 0.9;
     position: absolute;
     z-index: 601 !important;
-    min-width: 140px;
-    max-width: 200px;
 }
 
 div.d3-tooltip p {
@@ -347,12 +353,12 @@ p.custom-list-header .glyphicon {
     text-align: center;
     width: 100%;
     overflow-y: auto;
-    min-height: 480px;
-    height: 100%;
 }
 
 .sliders {
     margin: auto;
+    margin-top: 5px;
+    margin-bottom: 2.5px;
     width: 70%;
 }
 
