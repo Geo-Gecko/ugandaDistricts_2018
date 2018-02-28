@@ -1,7 +1,16 @@
 ﻿var cbounds;
 (function (d3, $, queue, window) {
   'use strict';
-  $("#filters").css("height",$(window).height()-$("#filters").offset().top-10+"px")
+   if ($(window).width() < 768)
+      {    
+       $("#filters").css("height",$(window).height()-20+"px")
+      }
+   else
+      {    
+       $("#filters").css("height",$(window).height()-$("#filters").offset().top-20+"px")
+      }
+  $("#details").css("height",$(window).height()+5+"px");
+  $(".container-fluid").css("height",$(window).height()-70+"px");
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
   'use strict';
@@ -237,14 +246,15 @@
         var h = (window.innerHeight ||
       document.documentElement.clientHeight ||
       document.body.clientHeight);
-    if (h > 540) {
+      h = h-20
+//    if (h > 540) {
       d3.select(".list-container").style("height", h + "px");
       d3.select("#d3-map-container").style("height", h + "px");
-    }
+//    }
     var w = (window.innerWidth ||
       document.documentElement.clientWidth ||
       document.body.clientWidth);
-    d3.select(".list-container").style("height", h - 0 + "px")
+//    d3.select(".list-container").style("height", h - 0 + "px")
 
     var map = new L.Map("d3-map-container", {
         center: [1.367, 32.305],
@@ -335,14 +345,14 @@
 //      var width = $(window).width();
 //      var height = $(window).height()-100; 
       var width = $(window).width();
-      var height = $(window).height();
+      var height = $(window).height()-70;
       $(".toggler").css("height",height+25);
         $("#right").find(".toggler").append("<div id='logo' style=\"position: relative; bottom: calc(-100% + 170px); left: -40px;\">\n" +
             "                    <a href=\"https://www.geogecko.com/\" target=\"_blank\">\n" +
             "                        <img src=\"./data/Logo.svg\" alt=\"Geo Gecko\" style=\"width:100%; height:100%;\">\n" +
             "                    </a>\n" +
             "            </div>");
-      $("#d3-map-container").css("width",width);
+//      $("#d3-map-container").css("width",width);
       $("#d3-map-container").css("height",height);
       $("#right").find(".toggler").append("<div id = 'rtitle'></div>");
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>F</div>");
@@ -1635,133 +1645,32 @@
 
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");
-//      var width = wrapper.node().offsetWidth || 960;
-//      var height = wrapper.node().offsetHeight || 480;
+      $("#details").css("height",$(window).height()+5+"px");
+      $(".container-fluid").css("height",$(window).height()-70+"px");
       var width = $(window).width();
-      var height = $(window).height()-25;  
-      // console.log(width, height);
-      $(".toggler").css("height",height+25);
-      var ht = $("#rtitle").height();
-      ht = (height - ht)/2;
-      $("#rtitle").css("margin-top",ht+"px")
-
-      var ht = $("#ltitle").height();
-      ht = (height - ht)/2;
-      $("#ltitle").css("margin-top",ht+"px")
-
-      if ($("#right").width()+$("#left").width() > width-40)
-         {
-          if ($("#left").attr("data-status") =="opened")
-             {
-              $("#left").find(".toggler").trigger("click");
-             } 
-         }     
-      if (width < 400)
-         {  
-          $("#right").css("width","80%");
-          // $("#right").css("min-width","307px");
-          $("#left").css("width","80%");
-          // $("#left").css("min-width","307px");
-          if ($("#left").attr("data-status") =="opened")
-             {
-              $("#left").find(".toggler").trigger("click");
-             }
-          if ($("#right").attr("data-status") =="opened")
-             {
-              $("#right").find(".toggler").trigger("click");
-             }  
-         }   
+      var height = $(window).height()-70;  
+      var h = (window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight);
+      h = h-70
+      d3.select(".list-container").style("height", h + "px");
+      if ($(window).width() < 768)
+         {    
+          $("#filters").css("height",$(window).height()-20+"px")
+         }
       else
-         {
-          $("#right").css("max-width","372px");
-          $("#right").css("min-width","372px");
-          $("#left").css("max-width","372px");
-          $("#left").css("min-width","372px");
-         }    
-      $("#d3-map-container").css("width",width);
-      $("#d3-map-container").css("height",height);
+         {    
+          $("#filters").css("height",$(window).height()-$("#filters").offset().top-20+"px")
+         }
+      d3.select("#d3-map-container").style("height", h + "px");
       if (width) {
         d3.select("#d3-map-container").select("svg")
           .attr("viewBox", "0 0 " + width + " " + height)
           .attr("width", width)
           .attr("height", height);
       }
-     /*setTimeout(function(){
-        zoom = map.getBoundsZoom(cbounds); 
-        map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
-        map.fitBounds(cbounds);
-        map.invalidateSize();
-     },2000);*/
-
     });
-    var triggerclick = false;
-     $(document).on("click",".toggler",function(e){ 
-      if (triggerclick)
-         {
-          triggerclick = false;  
-          return;  
-         }
-      e.stopPropagation();
-      e.preventDefault(); 
-      if ($(window).width() < 400)
-         {  
-          setTimeout(function(){   
-             if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
-                {
-                 if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                    {
-                     $("#left").find(".toggler").trigger("click");
-                    } 
-                }
-             else
-                {
-                }  
-          },500) 
-         } 
-      else
-         {
-          if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
-             {
-              if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                 {
-                  if ($("#left").attr("data-status") =="opened")
-                     {
-                      $("#left").find(".toggler").trigger("click");
-                     } 
-                 }   
-             }
-         }
-     });
-
-
-      if ($(window).width() > 400)
-         {  
-          $("#right").css("max-width","372px");
-          $("#right").css("min-width","372px");
-          $("#left").css("max-width","372px");
-          $("#left").css("min-width","372px");
-          $("#left").find(".toggler").trigger("click");
-          $("#right").find(".toggler").trigger("click");
-          setTimeout(function(){   
-             if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                {
-                 if ($("#left").attr("data-status") =="opened")
-                    {
-                     $("#left").find(".toggler").trigger("click");
-                    } 
-                } 
-          },1000)
-         } 
-      else
-         {
-          $("#left").find(".toggler").css("margin-top","-35px") 
-          $("#right").css("max-width","301px");
-          $("#right").css("min-width","301px");
-          $("#left").css("max-width","303px");
-          $("#left").css("min-width","303px");
-         }   
-    } // ready
-
+  }
 
 
 })(d3, $, queue, window);
