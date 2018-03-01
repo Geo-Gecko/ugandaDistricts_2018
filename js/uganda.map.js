@@ -7,10 +7,10 @@
       }
    else
       {    
-       $("#filters").css("height",$(window).height()-$("#filters").offset().top-20+"px")
+       $("#filters").css("height",$(window).height()-200-40+"px")
       }
   $("#details").css("height",$(window).height()+5+"px");
-  $(".container-fluid").css("height",$(window).height()-70+"px");
+  $(".container-fluid").css("height",$(window).height()-10+"px");
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
   'use strict';
@@ -343,7 +343,7 @@
 //    var width = wrapper.node().offsetWidth || 960;
 //    var height = wrapper.node().offsetHeight || 480;
 //      var width = $(window).width();
-//      var height = $(window).height()-100; 
+//      var height = $(window).height()-200; 
       var width = $(window).width();
       var height = $(window).height()-70;
       $(".toggler").css("height",height+25);
@@ -1254,9 +1254,13 @@
         }
     }
         d3.select("#education-list").selectAll("p").append("div").attr("class", "sliders");
+        d3.select("#education-list").append("p");
         d3.select("#socio-economic-list").selectAll("p").append("div").attr("class", "sliders");
+        d3.select("#socio-economic-list").append("p");
         d3.select("#wash-and-health-list").selectAll("p").append("div").attr("class", "sliders");
+        d3.select("#wash-and-health-list").append("p");
         d3.select("#energy-list").selectAll("p").append("div").attr("class", "sliders");
+        d3.select("#energy-list").append("p");
        // console.log(1);
       //console.log(createSliders)
         // createSliders.append("div")
@@ -1646,7 +1650,7 @@
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");
       $("#details").css("height",$(window).height()+5+"px");
-      $(".container-fluid").css("height",$(window).height()-70+"px");
+      $(".container-fluid").css("height",$(window).height()-10+"px");
       var width = $(window).width();
       var height = $(window).height()-70;  
       var h = (window.innerHeight ||
@@ -1660,7 +1664,7 @@
          }
       else
          {    
-          $("#filters").css("height",$(window).height()-$("#filters").offset().top-20+"px")
+          $("#filters").css("height",$(window).height()-200-40+"px")
          }
       d3.select("#d3-map-container").style("height", h + "px");
       if (width) {

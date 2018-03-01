@@ -332,10 +332,6 @@ p.custom-list-header .glyphicon {
     margin: 0;
 }
 
-.custom-list p:hover {
-    background: rgba(227, 120, 74, 0.12) !important;
-    color: #000 !important;
-}
 
 .collapsed {
     display: none;
@@ -507,6 +503,31 @@ span.colorbox.four {
  {
   z-index:0 !important;
  }
+
+.noUi-horizontal
+  {
+   height:10px !important;
+  } 
+
+.noUi-connects
+  {
+   margin-top:11px !important;
+  } 
+
+.noUi-target
+  {
+   border:none !important;
+  }
+
+.noUi-handle-lower
+  {
+   top:-10px !important;
+  }  
+
+.noUi-handle-upper
+  {
+   top:-10px !important;
+  }  
 
 @media screen and (max-width: 768px) { .row {flex-direction: row;} }
 
