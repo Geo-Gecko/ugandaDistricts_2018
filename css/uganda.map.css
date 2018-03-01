@@ -290,16 +290,27 @@ div.d3-tooltip p {
 }
 .custom-list-header {
     margin: 0;
-    /*padding: 7px 6px;*/
+    padding: 7px 6px;
     /*background-color: rgba(245, 245, 245, 0.9);*/
     text-align: center;
     font-size: 16px;
     color: #52595e;
     font-weight: bold;
     font-style: normal;
-    cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #dfe9f1;
+}
+
+.custom-list-headero {
+    margin: 0;
+    padding: 7px 6px;
+    /*background-color: rgba(245, 245, 245, 0.9);*/
+    text-align: center;
+    font-size: 16px;
+    color: #52595e;
+    font-weight: bold;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
 }
 
 p.custom-list-header .glyphicon {

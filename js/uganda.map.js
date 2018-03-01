@@ -1539,13 +1539,13 @@
         // console.log(values);
         var chartData = [headerList].concat([values]);
 
-        var valueLabelWidth = 10; // space reserved for value labels (right)
+        var valueLabelWidth = 20; // space reserved for value labels (right)
         var barHeight = 25; // height of one bar
         var barLabelWidth = 200; // space reserved for bar labels
-        var barLabelPadding = 5; // padding between bar and bar labels (left)
+        var barLabelPadding = 25; // padding between bar and bar labels (left)
         var gridLabelHeight = 18; // space reserved for gridline labels
         var gridChartOffset = 3; // space between start of grid and first bar
-        var maxBarWidth = 150; // width of the bar with the max value
+        var maxBarWidth = 175; // width of the bar with the max value
 
 // accessor functions
         var barLabel = function(d) {  return d; };
@@ -1555,7 +1555,7 @@
         var yScale = d3.scale.ordinal().domain(d3.range(0, chartData[0].length)).rangeBands([0, chartData[0].length * barHeight]);
         var y = function(d, i) { return yScale(i); };
         var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-        var x = d3.scale.linear().domain([0, 100/*d3.max(data, barValue)*/]).range([0, maxBarWidth]);
+        var x = d3.scale.linear().domain([0, 100/*d3.max(data, barValue)*/]).range([0, maxBarWidth]); console.log(x);
 // svg container element
         var chart = d3.select('#statistics-list').append("svg")
             .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
@@ -1564,14 +1564,14 @@
         var gridContainer = chart.append('g')
             .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')');
         gridContainer.selectAll("text").data(x.ticks(10)).enter().append("text")
-            .attr("x", x)
+            .attr("x",function(d){return x(d)+5;})
             .attr("dy", -3)
             .attr("text-anchor", "middle")
             .text(String);
 // vertical grid lines
         gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
-            .attr("x1", x)
-            .attr("x2", x)
+            .attr("x1",function(d){return x(d)+5;})
+            .attr("x2",function(d){return x(d)+5;})
             .attr("y1", 0)
             .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
             .style("stroke", "#ccc");
@@ -1592,7 +1592,7 @@
         barsContainer.selectAll("rect").data(chartData[1]).enter().append("rect")
             .attr('y', y)
             .attr('height', yScale.rangeBand() - 5)
-            .attr('width', function(d) { return x(barValue(d)); })
+            .attr('width', function(d) { return x(barValue(d))+3; })
             .attr('stroke', 'white')
             .attr('fill', '#E3784A');
 // bar value labels
