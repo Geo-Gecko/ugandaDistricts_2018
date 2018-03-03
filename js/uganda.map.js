@@ -1,4 +1,5 @@
 ﻿var cbounds;
+var  map;
 (function (d3, $, queue, window) {
   'use strict';
    if ($(window).width() < 768)
@@ -9,8 +10,10 @@
       {    
        $("#filters").css("height",$(window).height()-200-40+"px")
       }
-  $("#details").css("height",$(window).height()+5+"px");
-  $(".container-fluid").css("height",$(window).height()-10+"px");
+   $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+   $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
+   $("#details").css("height",$(window).height()+5+"px");
+   $(".container-fluid").css("height",$(window).height()-10+"px");
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
   'use strict';
@@ -56,7 +59,6 @@
       d3.select("#household-count").text(global.householdCount.toLocaleString());
 
       _selectedDataset = dataset1;
-      console.log(_selectedDataset);
   }
 
     function ready(error, ugandaGeoJson, washCSV, filterList) {
@@ -256,7 +258,7 @@
       document.body.clientWidth);
 //    d3.select(".list-container").style("height", h - 0 + "px")
 
-    var map = new L.Map("d3-map-container", {
+    map = new L.Map("d3-map-container", {
         center: [1.367, 32.305],
         zoom: 7,
         zoomControl: false
@@ -1651,6 +1653,17 @@
       var wrapper = d3.select("#d3-map-wrapper");
       $("#details").css("height",$(window).height()+5+"px");
       $(".container-fluid").css("height",$(window).height()-10+"px");
+//      $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+//      $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
+      $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+      if ($('[rel="map"]').attr("lefted") == "1")
+         {  
+          $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
+         }
+      else  
+         {  
+          $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-5+"px");
+         }
       var width = $(window).width();
       var height = $(window).height()-70;  
       var h = (window.innerHeight ||
@@ -1661,10 +1674,16 @@
       if ($(window).width() < 768)
          {    
           $("#filters").css("height",$(window).height()-20+"px")
+          $('[rel="filters"]').css("width","null")
+          $('[rel="statistics"]').css("width","null")
+          $("#collapse-door-right").hide();
+          $("#collapse-door-left").hide();
          }
       else
          {    
           $("#filters").css("height",$(window).height()-200-40+"px")
+          $("#collapse-door-right").show();
+          $("#collapse-door-left").show();
          }
       d3.select("#d3-map-container").style("height", h + "px");
       if (width) {
@@ -1676,5 +1695,245 @@
     });
   }
 
-
 })(d3, $, queue, window);
+
+
+  $(document).on("click",'[rel="rbutton"]',function(){
+     id = $(this).attr("id"); 
+     if (id == "right-collapse")
+        { 
+         $(this).hide(); 
+         $("#right-expand").show();
+         $('[rel="statistics"]').attr("oclass",$('[rel="statistics"]').attr("class"))
+         classtart = $('[rel="map"]').attr("class");
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-12")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-4")
+            }    
+         $('[rel="map"]').attr("righted",1);
+         initbreak = "12";    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "4";
+            } 
+         classend = classend.join("-"+initbreak);
+         $('[rel="statistics"]').css("width",$('[rel="statistics"]').width()+"px");
+         $('[rel="statistics"]').attr("class","");
+         $('[rel="statistics"]').animate({width: "0"}, {
+            duration: 1000,
+              specialEasing: {
+              width: "linear",
+              height: "easeOutBounce"
+             },
+          complete: function() 
+             {
+              $('[rel="statistics"]').hide();
+              $('[rel="map"]').attr("class",classend);
+              $('[rel="statistics"]').css("width","");
+              map.invalidateSize();
+              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-10+"px");
+             }
+         });
+        } 
+     if (id == "right-expand")
+        {
+         $(this).hide(); 
+         $("#right-collapse").show();
+         classtart = $('[rel="map"]').attr("class");
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-12")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-4")
+            }  
+         $('[rel="map"]').attr("righted",0);
+         initbreak = "12";    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "4";
+            }  
+         classend = classend.join("-"+initbreak);
+         $('[rel="statistics"]').css("width",$('[rel="statistics"]').width()+"px");
+         newwidth = $(window).width()*0.3333;   
+         $('[rel="statistics"]').show();
+         $('[rel="statistics"]').animate({width: newwidth},{
+            duration: 1000,
+              specialEasing: {
+              width: "linear",
+              height: "easeOutBounce"
+             },
+          complete: function() 
+             {
+              $('[rel="statistics"]').attr("class",$('[rel="statistics"]').attr("oclass"));
+              $('[rel="map"]').attr("class",classend);
+              $('[rel="statistics"]').css("width","");
+              map.invalidateSize();
+              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
+             }
+         });
+        } 
+  });
+
+  $(document).on("click",'[rel="lbutton"]',function(){
+     id = $(this).attr("id"); 
+     if (id == "left-collapse")
+        { 
+         $(this).hide(); 
+         $("#left-expand").show();
+         $('[rel="filters"]').attr("oclass",$('[rel="filters"]').attr("class"))
+         classtart = $('[rel="map"]').attr("class");
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-12")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-4")
+            }    
+         $('[rel="map"]').attr("lefted",1);
+         initbreak = "12";    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "4";
+            } 
+         classend = classend.join("-"+initbreak);
+         $('[rel="filters"]').css("left",$('[rel="map"]').offset().left+$('[rel="map"]').width()+"px")
+         $('[rel="filters"]').attr("oleft",$('[rel="map"]').offset().left+$('[rel="map"]').width());
+         $('[rel="filters"]').css("width",$('[rel="filters"]').width()+"px");
+         $('[rel="filters"]').attr("class",""); 
+         lchange = $(window).width()-10;
+         $('[rel="filters"]').animate({left:lchange}, {
+            duration: 1000,
+              specialEasing: {
+              width: "linear",
+              height: "easeOutBounce"
+             },
+          complete: function() 
+             {
+              $('[rel="filters"]').hide();
+              $('[rel="map"]').attr("class",classend);
+              $('[rel="filters"]').css("width","");
+              map.invalidateSize();
+              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-10+"px");
+             }
+         });
+        } 
+     if (id == "left-expand")
+        { 
+         $(this).hide(); 
+         $("#left-collapse").show();
+         classtart = $('[rel="map"]').attr("class");
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-12")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             classend = classtart.split("-8")
+            }    
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             classend = classtart.split("-4")
+            }    
+         $('[rel="map"]').attr("lefted",0);
+         initbreak = "12";    
+         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("lefted") == "0")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
+            {
+             initbreak = "8";
+            }  
+         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
+            {
+             initbreak = "4";
+            } 
+         classend = classend.join("-"+initbreak);
+         $('[rel="filters"]').css("width",$('[rel="filters"]').width()+"px");
+         newwidth = $(window).width()*0.3333;   
+         $('[rel="filters"]').show();
+         $('[rel="filters"]').animate({width: newwidth,left:$('[rel="filters"]').attr("oleft")},{
+            duration: 1000,
+              specialEasing: {
+              width: "linear",
+              height: "easeOutBounce"
+             },
+          complete: function() 
+             {
+              $('[rel="filters"]').attr("class",$('[rel="filters"]').attr("oclass"));
+              $('[rel="map"]').attr("class",classend);
+              $('[rel="filters"]').css("width","");
+              $('[rel="filters"]').css("left",0);
+              map.invalidateSize();
+              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
+              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
+             }
+         });
+        } 
+  })
