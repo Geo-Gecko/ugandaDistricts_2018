@@ -76,7 +76,7 @@ function _makeMapImage(map, callback) {
 						callback(canvas, legendUri);
 					});
 				});
-//			};
+			};
 		});
 	});
 }
@@ -92,7 +92,8 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
     html2canvas(toPrint, {
         useCORS: true,
         allowTaint: true,
-        transform: scale(2, 2),
+        scale : 2,
+//        transform: scale(2, 2),
         onrendered: function( canvas ) {
             img1 = canvas.toDataURL('image/png');
         }
@@ -100,7 +101,8 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
     html2canvas(toPrint1, {
         useCORS: true,
         allowTaint: true,
-        transform: scale(2, 2),
+        scale : 2,
+//        transform: scale(2, 2),
         onrendered: function( canvas ) {
             img2 = canvas.toDataURL('image/png');
         }
