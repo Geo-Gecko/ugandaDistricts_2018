@@ -52,13 +52,11 @@ function _makeMapImage(map, callback) {
 		console.log(svg)
 		var context = canvas.getContext('2d');
 
-                var simg = new Simg(svg);
-                simg.toImg(function(drawing){ console.log(drawing);
-//		// Make png from SVG D3 map
-//		svgAsPngUri(svg, {}, function (uri) {
-//			var drawing = new Image();
-//			drawing.src = uri;
-//			drawing.onload = function () {
+		// Make png from SVG D3 map
+		svgAsPngUri(svg, {}, function (uri) {
+			var drawing = new Image();
+			drawing.src = uri;
+			drawing.onload = function () {
 				context.drawImage(drawing, 0, 0);
 
 				var imageEl = document.createElement('image');
@@ -74,9 +72,7 @@ function _makeMapImage(map, callback) {
 
 				makeRectangularCanvas(canvas, function (canvas) {
 					var legend = document.querySelector('.menu-panel > svg');
-                var simg = new Simg(svg);
-                simg.toImg(function(legendUri){ 
-//					svgAsPngUri(legend, {}, function (legendUri) {
+					svgAsPngUri(legend, {}, function (legendUri) {
 						callback(canvas, legendUri);
 					});
 				});
@@ -96,7 +92,7 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
     html2canvas(toPrint, {
         useCORS: true,
         allowTaint: true,
-//        transform: scale(2, 2),
+        transform: scale(2, 2),
         onrendered: function( canvas ) {
             img1 = canvas.toDataURL('image/png');
         }
@@ -104,7 +100,7 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
     html2canvas(toPrint1, {
         useCORS: true,
         allowTaint: true,
-//        transform: scale(2, 2),
+        transform: scale(2, 2),
         onrendered: function( canvas ) {
             img2 = canvas.toDataURL('image/png');
         }
@@ -117,10 +113,7 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
 
 		_printPageHeader(doc, lastModified);
 
-//		var image = canvas.toDataURL('image/png');
-var context = canvas.getContext('2d');
-context.drawImage(legendUri, 0, 0);
-image = legendUri;
+		var image = canvas.toDataURL('image/png');
 		var x = (DOC_WIDTH - IMAGE_SIZE)/2;
 		var y = 50;
 		var width = IMAGE_SIZE;
