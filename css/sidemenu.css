@@ -1,7 +1,7 @@
 .sidebar{
       z-index: 999;
       position: fixed;
-      top: 5%;/*-1px;*/
+      top: 0%;/*-1px;*/
       bottom: -1px;
       padding:0px;
       width: auto;
@@ -32,17 +32,17 @@
 }
 .sidebar.sidebar-left{
       left:0px;
-      right:20px;
+      right:10px;
 }
 
 .sidebar.sidebar-right{
       right:0px;
-      left:20px;
+      left:10px;
 }
 
 @media (max-width: 527px) {
       .sidebar {
-            width: 270px;
+            width: 320px;
       }
       .sidebar.sidebar-left{
             left:0px;
@@ -57,7 +57,7 @@
 }
 @media (min-width: 528px) {
       .sidebar {
-            width: 270px;
+            width: 320px;
       }
       .sidebar.sidebar-left{
             left:0px;
@@ -71,7 +71,7 @@
 }
 @media (min-width: 768px) {
       .sidebar {
-            width: 270px;
+            width: 320px;
       }
       .sidebar.sidebar-left{
             left:0px;
@@ -85,7 +85,7 @@
 }
 @media (min-width: 992px) {
       .sidebar {
-            width: 270px;
+            width: 320px;
       }
       .sidebar.sidebar-left{
             left:0px;
@@ -99,7 +99,7 @@
 }
 @media (min-width: 1200px) {
       .sidebar {
-            width: 270px;
+            width: 320px;
       }
       .sidebar.sidebar-left{
             left:0px;
@@ -123,9 +123,11 @@
       position: absolute;
       top: 0%;
       bottom: 5%;
-      cursor: pointer;
-      background: rgba(227, 120, 74, 0.7);
+      cursor: default;
+      background: rgba(0,0,255,0.7);
 }
+.toggler:hover{cursor:pointer;}
+
 .sidebar-left > .toggler{
       -webkit-border-top-right-radius: 4px;
       -webkit-border-bottom-right-radius: 4px;

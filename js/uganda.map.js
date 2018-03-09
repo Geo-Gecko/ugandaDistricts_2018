@@ -1,19 +1,7 @@
-ï»¿var cbounds;
-var  map;
+var cbounds;
 (function (d3, $, queue, window) {
   'use strict';
-   if ($(window).width() < 768)
-      {    
-       $("#filters").css("height",$(window).height()-20+"px")
-      }
-   else
-      {    
-       $("#filters").css("height",$(window).height()-200-40+"px")
-      }
-   $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-   $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
-   $("#details").css("height",$(window).height()+5+"px");
-   $(".container-fluid").css("height",$(window).height()-10+"px");
+  $("#filters").css("height",$(window).height()-$("#filters").offset().top-150+"px")
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
   'use strict';
@@ -59,6 +47,7 @@ var  map;
       d3.select("#household-count").text(global.householdCount.toLocaleString());
 
       _selectedDataset = dataset1;
+      console.log(_selectedDataset);
   }
 
     function ready(error, ugandaGeoJson, washCSV, filterList) {
@@ -248,7 +237,6 @@ var  map;
         var h = (window.innerHeight ||
       document.documentElement.clientHeight ||
       document.body.clientHeight);
-      h = h-20
 //    if (h > 540) {
       d3.select(".list-container").style("height", h + "px");
       d3.select("#d3-map-container").style("height", h + "px");
@@ -256,9 +244,9 @@ var  map;
     var w = (window.innerWidth ||
       document.documentElement.clientWidth ||
       document.body.clientWidth);
-//    d3.select(".list-container").style("height", h - 0 + "px")
+    d3.select(".list-container").style("height", h - 0 + "px")
 
-    map = new L.Map("d3-map-container", {
+    var map = new L.Map("d3-map-container", {
         center: [1.367, 32.305],
         zoom: 7,
         zoomControl: false
@@ -268,7 +256,7 @@ var  map;
         //     position:'topright'
         // }).addTo(map);
 
-        var _3w_attrib = 'Created by <a href="http://www.geogecko.com">Geo Gecko</a> and Â© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Powered by <a href="https://d3js.org/">d3</a>';
+        var _3w_attrib = 'Created by <a href="http://www.geogecko.com">Geo Gecko</a> and © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Powered by <a href="https://d3js.org/">d3</a>';
         var basemap = L.tileLayer("https://api.mapbox.com/styles/v1/gecko/cj27rw7wy001w2rmzx0qdl0ek/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2Vja28iLCJhIjoidktzSXNiVSJ9.NyDfX4V8ETtONgPKIeQmvw", {attribution: _3w_attrib});
 
         basemap.addTo(map);
@@ -345,16 +333,16 @@ var  map;
 //    var width = wrapper.node().offsetWidth || 960;
 //    var height = wrapper.node().offsetHeight || 480;
 //      var width = $(window).width();
-//      var height = $(window).height()-200; 
+//      var height = $(window).height()-100; 
       var width = $(window).width();
-      var height = $(window).height()-70;
+      var height = $(window).height();
       $(".toggler").css("height",height+25);
         $("#right").find(".toggler").append("<div id='logo' style=\"position: relative; bottom: calc(-100% + 170px); left: -40px;\">\n" +
             "                    <a href=\"https://www.geogecko.com/\" target=\"_blank\">\n" +
             "                        <img src=\"./data/Logo.svg\" alt=\"Geo Gecko\" style=\"width:100%; height:100%;\">\n" +
             "                    </a>\n" +
             "            </div>");
-//      $("#d3-map-container").css("width",width);
+      $("#d3-map-container").css("width",width);
       $("#d3-map-container").css("height",height);
       $("#right").find(".toggler").append("<div id = 'rtitle'></div>");
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>F</div>");
@@ -366,7 +354,7 @@ var  map;
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#rtitle").height();
     ht = (height - ht)/2;
-        $("#rtitle").css("margin-top",ht+"px")
+        $("#rtitle").css("margin-top",ht-100+"px")
 
       $("#left").find(".toggler").append("<div id = 'ltitle'></div>");
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
@@ -381,7 +369,7 @@ var  map;
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#ltitle").height();
     ht = (height - ht)/2;
-    $("#ltitle").css("margin-top",ht+"px")
+    $("#ltitle").css("margin-top",ht-100+"px")
 
     var color = d3.scale.linear().domain(domain) //http://bl.ocks.org/jfreyre/b1882159636cc9e1283a
       .interpolate(d3.interpolateHcl)
@@ -643,7 +631,7 @@ var  map;
             var mouse = d3.mouse(svg.node()).map(function (d) {
                 return parseInt(d);
             });
-            var str = "<tr><button type='button' class='close' onclick='$(this).parent().hide();'>Ã—</button></tr>" +
+            var str = "<tr><button type='button' class='close' onclick='$(this).parent().hide();'>×</button></tr>" +
                 "<th><br/></th><tr><th>District:</th> <th style='right: 0;'>" + d.properties.DNAME_06 + "</th></tr>"
             if (d.properties._Population_2014) {
 
@@ -750,15 +738,18 @@ var  map;
     // }).addTo(map);
     countries = ugandaGeoJson.features;
         countriesOverlay.addTo(map);
-    /*country = L.geoJson(ugandaGeoJson)
+    /**/ 
+country = L.geoJson(ugandaGeoJson)
+console.log(country);
     cbounds = country.getBounds();
+
 
     setTimeout(function(){
        zoom = map.getBoundsZoom(cbounds);
-       map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
+       map.setView(cbounds.getCenter(),zoom-1,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
        map.fitBounds(cbounds);
        map.invalidateSize();
-    },1000)  ;*/
+    },1000)  ;
 
         function addLegend(domain, color) {
             var N = 4;
@@ -1256,13 +1247,9 @@ var  map;
         }
     }
         d3.select("#education-list").selectAll("p").append("div").attr("class", "sliders");
-        d3.select("#education-list").append("p");
         d3.select("#socio-economic-list").selectAll("p").append("div").attr("class", "sliders");
-        d3.select("#socio-economic-list").append("p");
         d3.select("#wash-and-health-list").selectAll("p").append("div").attr("class", "sliders");
-        d3.select("#wash-and-health-list").append("p");
         d3.select("#energy-list").selectAll("p").append("div").attr("class", "sliders");
-        d3.select("#energy-list").append("p");
        // console.log(1);
       //console.log(createSliders)
         // createSliders.append("div")
@@ -1557,7 +1544,7 @@ var  map;
         var yScale = d3.scale.ordinal().domain(d3.range(0, chartData[0].length)).rangeBands([0, chartData[0].length * barHeight]);
         var y = function(d, i) { return yScale(i); };
         var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-        var x = d3.scale.linear().domain([0, 100/*d3.max(data, barValue)*/]).range([0, maxBarWidth]); console.log(x);
+        var x = d3.scale.linear().domain([0, 100/*d3.max(data, barValue)*/]).range([0, maxBarWidth]);
 // svg container element
         var chart = d3.select('#statistics-list').append("svg")
             .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
@@ -1566,14 +1553,14 @@ var  map;
         var gridContainer = chart.append('g')
             .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')');
         gridContainer.selectAll("text").data(x.ticks(10)).enter().append("text")
-            .attr("x",function(d){return x(d)+5;})
+            .attr("x", x)
             .attr("dy", -3)
             .attr("text-anchor", "middle")
             .text(String);
 // vertical grid lines
         gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
-            .attr("x1",function(d){return x(d)+5;})
-            .attr("x2",function(d){return x(d)+5;})
+            .attr("x1", x)
+            .attr("x2", x)
             .attr("y1", 0)
             .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
             .style("stroke", "#ccc");
@@ -1594,7 +1581,7 @@ var  map;
         barsContainer.selectAll("rect").data(chartData[1]).enter().append("rect")
             .attr('y', y)
             .attr('height', yScale.rangeBand() - 5)
-            .attr('width', function(d) { return x(barValue(d))+3; })
+            .attr('width', function(d) { return x(barValue(d)); })
             .attr('stroke', 'white')
             .attr('fill', '#E3784A');
 // bar value labels
@@ -1651,289 +1638,139 @@ var  map;
 
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");
-      $("#details").css("height",$(window).height()+5+"px");
-      $(".container-fluid").css("height",$(window).height()-10+"px");
-//      $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-//      $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
-      $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-      if ($('[rel="map"]').attr("lefted") == "1")
-         {  
-          $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
-         }
-      else  
-         {  
-          $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-5+"px");
-         }
+//      var width = wrapper.node().offsetWidth || 960;
+//      var height = wrapper.node().offsetHeight || 480;
       var width = $(window).width();
-      var height = $(window).height()-70;  
-      var h = (window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight);
-      h = h-70
-      d3.select(".list-container").style("height", h + "px");
-      if ($(window).width() < 768)
-         {    
-          $("#filters").css("height",$(window).height()-20+"px")
-          $('[rel="filters"]').css("width","null")
-          $('[rel="statistics"]').css("width","null")
-          $("#collapse-door-right").hide();
-          $("#collapse-door-left").hide();
-         }
+      var height = $(window).height()-25;  
+      // console.log(width, height);
+      $(".toggler").css("height",height+25);
+      var ht = $("#rtitle").height();
+      ht = (height - ht)/2;
+      $("#rtitle").css("margin-top",ht+"px")
+
+      var ht = $("#ltitle").height();
+      ht = (height - ht)/2;
+      $("#ltitle").css("margin-top",ht+"px")
+
+      if ($("#right").width()+$("#left").width() > width-40)
+         {
+          if ($("#left").attr("data-status") =="opened")
+             {
+              $("#left").find(".toggler").trigger("click");
+             } 
+         }     
+      if (width < 400)
+         {  
+//          $("#right").css("width","70%");
+          $("#right").css("min-width","301px");
+//          $("#left").css("width","70%");
+          $("#left").css("min-width","301px");
+          if ($("#left").attr("data-status") =="opened")
+             {
+              $("#left").find(".toggler").trigger("click");
+             }
+          if ($("#right").attr("data-status") =="opened")
+             {
+              $("#right").find(".toggler").trigger("click");
+             }  
+         }   
       else
-         {    
-          $("#filters").css("height",$(window).height()-200-40+"px")
-          $("#collapse-door-right").show();
-          $("#collapse-door-left").show();
-         }
-      d3.select("#d3-map-container").style("height", h + "px");
+         {
+          $("#right").css("max-width","412px");
+          $("#right").css("min-width","412px");
+          $("#left").css("max-width","412px");
+          $("#left").css("min-width","412px");
+         }    
+      $("#d3-map-container").css("width",width);
+      $("#d3-map-container").css("height",height);
       if (width) {
         d3.select("#d3-map-container").select("svg")
           .attr("viewBox", "0 0 " + width + " " + height)
           .attr("width", width)
           .attr("height", height);
-      }
+      }  
+      $(".list-container").css("height", height + "px");
+     /*setTimeout(function(){
+        zoom = map.getBoundsZoom(cbounds); 
+        map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
+        map.fitBounds(cbounds);
+        map.invalidateSize();
+     },2000);*/
+
     });
-  }
+
+
+      if ($(window).width() > 400)
+         {  
+          $("#right").css("max-width","412px");
+          $("#right").css("min-width","412px");
+          $("#left").css("max-width","412px");
+          $("#left").css("min-width","412px");
+          $("#left").find(".toggler").trigger("click");
+          $("#right").find(".toggler").trigger("click");
+          setTimeout(function(){   
+             if ($("#right").width()+$("#left").width() > $(window).width()-40)
+                {
+                 if ($("#left").attr("data-status") =="opened")
+                    {
+                     $("#left").find(".toggler").trigger("click");
+                    } 
+                } 
+          },1000)
+         } 
+      else
+         {
+//          $("#left").find(".toggler").css("margin-top","-35px") 
+          $("#right").css("max-width","305px");
+          $("#right").css("min-width","305px");
+          $("#left").css("max-width","305px");
+          $("#left").css("min-width","305px");
+         }   
+
+
+    var triggerclick = false;
+     $(document).on("click",".toggler",function(e){ 
+      if (triggerclick)
+         {
+          triggerclick = false;  
+          return;  
+         }
+      e.stopPropagation();
+      e.preventDefault(); 
+      if ($(window).width() < 400)
+         {  
+          setTimeout(function(){   
+             if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
+                {
+                 if ($("#right").width()+$("#left").width() > $(window).width()-40)
+                    {
+                     $("#left").find(".toggler").trigger("click");
+                    } 
+                }
+             else
+                {
+                }  
+          },500) 
+         } 
+      else
+         {
+          if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
+             {
+              if ($("#right").width()+$("#left").width() > $(window).width()-40)
+                 {
+                  if ($("#left").attr("data-status") =="opened")
+                     {
+                      $("#left").find(".toggler").trigger("click");
+                     } 
+                 }   
+             }
+         }
+     });
+
+
+
+    } // ready
+
+
 
 })(d3, $, queue, window);
-
-
-  $(document).on("click",'[rel="rbutton"]',function(){
-     id = $(this).attr("id"); 
-     if (id == "right-collapse")
-        { 
-         $(this).hide(); 
-         $("#right-expand").show();
-         $('[rel="statistics"]').attr("oclass",$('[rel="statistics"]').attr("class"))
-         classtart = $('[rel="map"]').attr("class");
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-12")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-4")
-            }    
-         $('[rel="map"]').attr("righted",1);
-         initbreak = "12";    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "4";
-            } 
-         classend = classend.join("-"+initbreak);
-         $('[rel="statistics"]').css("width",$('[rel="statistics"]').width()+"px");
-         $('[rel="statistics"]').attr("class","");
-         $('[rel="statistics"]').animate({width: "0"}, {
-            duration: 1000,
-              specialEasing: {
-              width: "linear",
-              height: "easeOutBounce"
-             },
-          complete: function() 
-             {
-              $('[rel="statistics"]').hide();
-              $('[rel="map"]').attr("class",classend);
-              $('[rel="statistics"]').css("width","");
-              map.invalidateSize();
-              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-10+"px");
-             }
-         });
-        } 
-     if (id == "right-expand")
-        {
-         $(this).hide(); 
-         $("#right-collapse").show();
-         classtart = $('[rel="map"]').attr("class");
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-12")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-4")
-            }  
-         $('[rel="map"]').attr("righted",0);
-         initbreak = "12";    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "4";
-            }  
-         classend = classend.join("-"+initbreak);
-         $('[rel="statistics"]').css("width",$('[rel="statistics"]').width()+"px");
-         newwidth = $(window).width()*0.3333;   
-         $('[rel="statistics"]').show();
-         $('[rel="statistics"]').animate({width: newwidth},{
-            duration: 1000,
-              specialEasing: {
-              width: "linear",
-              height: "easeOutBounce"
-             },
-          complete: function() 
-             {
-              $('[rel="statistics"]').attr("class",$('[rel="statistics"]').attr("oclass"));
-              $('[rel="map"]').attr("class",classend);
-              $('[rel="statistics"]').css("width","");
-              map.invalidateSize();
-              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
-             }
-         });
-        } 
-  });
-
-  $(document).on("click",'[rel="lbutton"]',function(){
-     id = $(this).attr("id"); 
-     if (id == "left-collapse")
-        { 
-         $(this).hide(); 
-         $("#left-expand").show();
-         $('[rel="filters"]').attr("oclass",$('[rel="filters"]').attr("class"))
-         classtart = $('[rel="map"]').attr("class");
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-12")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-4")
-            }    
-         $('[rel="map"]').attr("lefted",1);
-         initbreak = "12";    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "4";
-            } 
-         classend = classend.join("-"+initbreak);
-         $('[rel="filters"]').css("left",$('[rel="map"]').offset().left+$('[rel="map"]').width()+"px")
-         $('[rel="filters"]').attr("oleft",$('[rel="map"]').offset().left+$('[rel="map"]').width());
-         $('[rel="filters"]').css("width",$('[rel="filters"]').width()+"px");
-         $('[rel="filters"]').attr("class",""); 
-         lchange = $(window).width()-10;
-         $('[rel="filters"]').animate({left:lchange}, {
-            duration: 1000,
-              specialEasing: {
-              width: "linear",
-              height: "easeOutBounce"
-             },
-          complete: function() 
-             {
-              $('[rel="filters"]').hide();
-              $('[rel="map"]').attr("class",classend);
-              $('[rel="filters"]').css("width","");
-              map.invalidateSize();
-              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-10+"px");
-             }
-         });
-        } 
-     if (id == "left-expand")
-        { 
-         $(this).hide(); 
-         $("#left-collapse").show();
-         classtart = $('[rel="map"]').attr("class");
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-12")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             classend = classtart.split("-8")
-            }    
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             classend = classtart.split("-4")
-            }    
-         $('[rel="map"]').attr("lefted",0);
-         initbreak = "12";    
-         if ($('[rel="map"]').attr("lefted") == "1" && $('[rel="map"]').attr("lefted") == "0")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "1")
-            {
-             initbreak = "8";
-            }  
-         if ($('[rel="map"]').attr("lefted") == "0" && $('[rel="map"]').attr("righted") == "0")
-            {
-             initbreak = "4";
-            } 
-         classend = classend.join("-"+initbreak);
-         $('[rel="filters"]').css("width",$('[rel="filters"]').width()+"px");
-         newwidth = $(window).width()*0.3333;   
-         $('[rel="filters"]').show();
-         $('[rel="filters"]').animate({width: newwidth,left:$('[rel="filters"]').attr("oleft")},{
-            duration: 1000,
-              specialEasing: {
-              width: "linear",
-              height: "easeOutBounce"
-             },
-          complete: function() 
-             {
-              $('[rel="filters"]').attr("class",$('[rel="filters"]').attr("oclass"));
-              $('[rel="map"]').attr("class",classend);
-              $('[rel="filters"]').css("width","");
-              $('[rel="filters"]').css("left",0);
-              map.invalidateSize();
-              $("#collapse-door-right").css("left",$("[rel='map']").offset().left-$("#right-collapse").outerWidth()+15+"px");
-              $("#collapse-door-left").css("left",$("[rel='map']").offset().left+$("[rel='map']").outerWidth()-15+"px");
-             }
-         });
-        } 
-  })
