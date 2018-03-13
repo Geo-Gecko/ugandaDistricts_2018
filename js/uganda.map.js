@@ -1690,7 +1690,7 @@ console.log(country);
           $("#left").css("min-width","301px");
           if ($("#left").attr("data-status") =="opened")
              {
-              $("#left").find(".toggler").trigger("click");
+//              $("#left").find(".toggler").trigger("click");
              }
           if ($("#right").attr("data-status") =="opened")
              {
@@ -1748,7 +1748,34 @@ console.log(country);
           $("#right").css("min-width","305px");
           $("#left").css("max-width","305px");
           $("#left").css("min-width","305px");
+          $("#left").find(".toggler").trigger("click");
+          $("#right").find(".toggler").trigger("click");
+          $("#left").find(".toggler").trigger("click");
+          $("#right").find(".toggler").trigger("click");
          }   
+
+      if ($(window).width() > 700)
+         {  
+          if ($("#left").attr("data-status") =="opened")
+             {
+              $("#left").find(".toggler").trigger("click");
+             }
+          if ($("#right").attr("data-status") =="opened")
+             {
+              $("#right").find(".toggler").trigger("click");
+             }
+         } 
+      else
+         {
+          if ($("#left").attr("data-status") =="closed")
+             {
+              $("#left").find(".toggler").trigger("click");
+             }
+          if ($("#right").attr("data-status") =="closed")
+             {
+//              $("#right").find(".toggler").trigger("click");
+             }  
+         }
 
 
     var triggerclick = false;
