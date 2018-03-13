@@ -92,7 +92,6 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
     html2canvas(toPrint, {
         useCORS: true,
         allowTaint: true,
-        scale : 2,
 //        transform: scale(2, 2),
         onrendered: function( canvas ) {
             img1 = canvas.toDataURL('image/png');
@@ -101,7 +100,6 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
     html2canvas(toPrint1, {
         useCORS: true,
         allowTaint: true,
-        scale : 2,
 //        transform: scale(2, 2),
         onrendered: function( canvas ) {
             img2 = canvas.toDataURL('image/png');

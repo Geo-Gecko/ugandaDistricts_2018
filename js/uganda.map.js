@@ -1,6 +1,15 @@
 var cbounds;
 (function (d3, $, queue, window) {
   'use strict';
+  if ($(window).width() < 600)
+     {
+      $("#overlay-content").css("width","auto");
+     }
+  else 
+     {
+      $("#overlay-content").css("width","auto");
+     }
+  
   $("#filters").css("height",$(window).height()-$("#filters").offset().top-150+"px")
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
@@ -353,7 +362,7 @@ var cbounds;
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>R</div>");
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#rtitle").height();
-    ht = (height - ht)/2;
+    ht = ($(window).height() - ht)/2;
         $("#rtitle").css("margin-top",ht-100+"px")
 
       $("#left").find(".toggler").append("<div id = 'ltitle'></div>");
@@ -368,7 +377,7 @@ var cbounds;
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>C</div>");
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#ltitle").height();
-    ht = (height - ht)/2;
+    ht = ($(window).height() - ht)/2;
     $("#ltitle").css("margin-top",ht-100+"px")
 
     var color = d3.scale.linear().domain(domain) //http://bl.ocks.org/jfreyre/b1882159636cc9e1283a
@@ -746,9 +755,12 @@ console.log(country);
 
     setTimeout(function(){
        zoom = map.getBoundsZoom(cbounds);
-       map.setView(cbounds.getCenter(),zoom-1,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
-       map.fitBounds(cbounds);
-       map.invalidateSize();
+       map.setZoom(zoom);
+       setTimeout(function(){  
+          map.setView(cbounds.getCenter(),zoom-1,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
+          map.fitBounds(cbounds);
+          map.invalidateSize();
+       },500);
     },1000)  ;
 
         function addLegend(domain, color) {
@@ -1640,16 +1652,27 @@ console.log(country);
       var wrapper = d3.select("#d3-map-wrapper");
 //      var width = wrapper.node().offsetWidth || 960;
 //      var height = wrapper.node().offsetHeight || 480;
+  if ($(window).width() < 600)
+     {
+      $("#overlay-content").css("width","auto");
+     }
+  else 
+     {
+      $("#overlay-content").css("width","auto");
+     }
+
+    $("#overlay-content").center();
+
       var width = $(window).width();
       var height = $(window).height()-25;  
       // console.log(width, height);
       $(".toggler").css("height",height+25);
       var ht = $("#rtitle").height();
-      ht = (height - ht)/2;
+      ht = ($(window).height() - ht)/2;
       $("#rtitle").css("margin-top",ht+"px")
 
       var ht = $("#ltitle").height();
-      ht = (height - ht)/2;
+      ht = ($(window).height() - ht)/2;
       $("#ltitle").css("margin-top",ht+"px")
 
       if ($("#right").width()+$("#left").width() > width-40)

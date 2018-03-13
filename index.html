@@ -14,7 +14,6 @@
     <script src="./js/nouislider.js"></script>
     <script src="./js/saveSvgAsPng.js"></script>
     <script src="./js/pdf.js"></script>
-    <script src="./js/simg.js"></script>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/sidemenu.js"></script>
     <link href="./css/sidemenu.css" rel="Stylesheet" type="text/css">
@@ -24,7 +23,7 @@
 
 <body>
 
-<div id="overlay-content">
+<div id="overlay-content" style = "text-align: center;">
     For <br>
     -tailored solutions <br>
     -additional indicators <br>
@@ -33,13 +32,13 @@
 
     please contact <a href="info@geogecko.com" target="_top">info@geogecko.com</a>
 
-    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; background-color: rgba(245, 245, 245, 0.7); width: 90%; left:40%; top: 50%">
+    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; background-color: rgba(245, 245, 245, 0.7); width: 90%;overflow:hidden;" >
         <a href="https://www.geogecko.com/" target="_blank">
-            <img src="./data/Logo_full.svg" alt="Geo Gecko" style="width:251px; height:66px;">
+            <img src="./data/Logo_full.svg" alt="Geo Gecko" style="width:376px; height:66px;">
         </a>
     </div>
     <br>
-    <label style = "margin-left:-10px;">Click on the blank (transparent) space to open the map</label>
+    <img src = "./css/images/play.svg" id = "play">
 </div>
 <div id="overlay"></div>
 <div class="main-container">
@@ -70,8 +69,8 @@
         </span>
 
         <p class="custom-list-headero"><span style="border-radius: 10px;">
-           <i id="d3-map-refresh"><button class = "btn btn-danger btn-xs">Reset Filters</button></i></span>
-           <span style="border-radius: 10px;"><i id="d3-map-make-pdf"><button class = "btn btn-primary btn-xs">Download PDF</button></i></span>
+           <i id="d3-map-refresh"><img src = "./css/images/reset.svg" style  ="width:30px;height:30px;" title = "Reset Filters" id= "reset"></i></span>
+           <span style="border-radius: 10px;"><i id="d3-map-make-pdf"><img src = "./css/images/download.svg" style  ="width:30px;height:30px;" id = "download" title = "Download PDF"></i></span>
         </p>
 
         <div class="col-md-12" style = "overflow-y:auto;" id = "filters">
@@ -91,16 +90,14 @@
                 </a>
             </div>-->
         </div>
-
     </div>
 
 </div>
 <div class="row" style="margin:0px;">
     <!--<div class="bottom-panel col-md-12" style="padding: 0 5px;">  <span class="glyphicon glyphicon-menu-down"></span>-->
     <div class="left-panel col-md-2" id = "left" style = "display:none;">
-    <svg style = "height:0px;">
         <div class="menu-panel" style = "">
-
+          <svg style = "height:0px;">
             <div class="list-container" style = "">
                 <div class="col-md-12">
                     <p id="districtHeader" class="custom-list-header">National Average </p>
@@ -126,10 +123,8 @@
                      </div>
                 </div>
             </div>
-
-
+         </svg>
         </div>
-    </svg>
     </div>
 
     <div>
@@ -164,7 +159,7 @@
     $("#overlay-content").show().center();
     $("#header").center();
 
-    $("#overlay").on("click", function () {
+    $("#play").on("click", function () {
         $("#overlay").fadeOut();
         $("#overlay-content").fadeOut();
         $("#right").show();
