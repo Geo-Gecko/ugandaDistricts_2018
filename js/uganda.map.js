@@ -1,16 +1,11 @@
 var cbounds;
+var  map;
+var ugandaPath;
+var reload = true;
+var countries = [];
 (function (d3, $, queue, window) {
   'use strict';
-  if ($(window).width() < 600)
-     {
-      $("#overlay-content").css("width","auto");
-     }
-  else 
-     {
-      $("#overlay-content").css("width","auto");
-     }
-  
-  $("#filters").css("height",$(window).height()-$("#filters").offset().top-150+"px")
+  $("#filters").css("height",$(window).height()-$("#filters").offset().top-10+"px")
   // https://www.humanitarianresponse.info/en/operations/afghanistan/cvwg-3w
   // https://public.tableau.com/profile/geo.gecko#!/vizhome/Districtpolygon/v1?publish=yes
   'use strict';
@@ -255,7 +250,7 @@ var cbounds;
       document.body.clientWidth);
     d3.select(".list-container").style("height", h - 0 + "px")
 
-    var map = new L.Map("d3-map-container", {
+    map = new L.Map("d3-map-container", {
         center: [1.367, 32.305],
         zoom: 7,
         zoomControl: false
@@ -335,7 +330,6 @@ var cbounds;
 
 
 
-    var ugandaPath;
     var domain = [+Infinity, -Infinity];
     var opacity = 0.7;
 //    var wrapper = d3.select("#d3-map-wrapper");
@@ -348,7 +342,7 @@ var cbounds;
       $(".toggler").css("height",height+25);
         $("#right").find(".toggler").append("<div id='logo' style=\"position: relative; bottom: calc(-100% + 170px); left: -40px;\">\n" +
             "                    <a href=\"https://www.geogecko.com/\" target=\"_blank\">\n" +
-            "                        <img src=\"./data/Logo.svg\" alt=\"Geo Gecko\" style=\"width:100%; height:100%;\">\n" +
+            "                        <img src=\"./data/Logo.svg\" alt=\"Geo Gecko\" style=\"width:200%; height:200%;\">\n" +
             "                    </a>\n" +
             "            </div>");
       $("#d3-map-container").css("width",width);
@@ -362,8 +356,8 @@ var cbounds;
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>R</div>");
       $("#right").find("#rtitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#rtitle").height();
-    ht = ($(window).height() - ht)/2;
-        $("#rtitle").css("margin-top",ht-100+"px")
+    ht = (height - ht)/2;
+        $("#rtitle").css("margin-top",ht+"px")
 
       $("#left").find(".toggler").append("<div id = 'ltitle'></div>");
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
@@ -377,8 +371,8 @@ var cbounds;
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>C</div>");
       $("#left").find("#ltitle").append("<div style = 'font-weight:bolder;padding-left:3px;text-align:center;'>S</div>");
     var ht = $("#ltitle").height();
-    ht = ($(window).height() - ht)/2;
-    $("#ltitle").css("margin-top",ht-100+"px")
+    ht = (height - ht)/2;
+    $("#ltitle").css("margin-top",ht+"px")
 
     var color = d3.scale.linear().domain(domain) //http://bl.ocks.org/jfreyre/b1882159636cc9e1283a
       .interpolate(d3.interpolateHcl)
@@ -393,7 +387,7 @@ var cbounds;
     //console.log(datasetNest);
 
 
-    var countries = [];
+    countries = [];
     var countriesOverlay = L.d3SvgOverlay(function (sel, proj) {
       var projection = proj.pathFromGeojson.projection;
       var path = d3.geo.path().projection(projection);
@@ -566,7 +560,7 @@ var cbounds;
 
             var valueLabelWidth = 10; // space reserved for value labels (right)
             var barHeight = 25; // height of one bar
-            var barLabelWidth = 200; // space reserved for bar labels
+            var barLabelWidth = 180; // space reserved for bar labels
             // var barLabelPadding = 5; // padding between bar and bar labels (left)
             var gridLabelHeight = 18; // space reserved for gridline labels
             var gridChartOffset = 3; // space between start of grid and first bar
@@ -747,20 +741,14 @@ var cbounds;
     // }).addTo(map);
     countries = ugandaGeoJson.features;
         countriesOverlay.addTo(map);
-    /**/ 
-country = L.geoJson(ugandaGeoJson)
-console.log(country);
+    country = L.geoJson(ugandaGeoJson)
     cbounds = country.getBounds();
-
 
     setTimeout(function(){
        zoom = map.getBoundsZoom(cbounds);
-       map.setZoom(zoom);
-       setTimeout(function(){  
-          map.setView(cbounds.getCenter(),zoom-1,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
-          map.fitBounds(cbounds);
-          map.invalidateSize();
-       },500);
+       map.setView(cbounds.getCenter(),zoom-1,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
+       map.fitBounds(cbounds);
+       map.invalidateSize();
     },1000)  ;
 
         function addLegend(domain, color) {
@@ -887,11 +875,19 @@ console.log(country);
         function makePdf() {
             if ($("#d3-map-make-pdf").hasClass('disabled')) {
                 return;
-            }
+            }  
             var lat_tmp = 1.367;
             var lng_tmp = 32.305;
             map.setMaxBounds(null);
-            map.setView([lat_tmp, lng_tmp], 7);
+            if ($(window).width() < 600 || $(window).height() < 400)
+               {
+                map.setView(cbounds.getCenter(), 3);
+               }
+            else
+               {
+                map.setView([lat_tmp, lng_tmp], 7);
+               }
+
             $("#d3-map-make-pdf").addClass('disabled');
             var spinner = new Spinner({length: 3, radius: 4, width: 2}).spin(document.body);
             document.getElementById('d3-map-make-pdf').appendChild(spinner.el);
@@ -914,9 +910,35 @@ console.log(country);
                 type: "HEAD",
                 url: "./data/WASH_HEALTH.csv",
             }).done(function () {
+
                 var lastModified = new Date($xhr.getResponseHeader("Last-Modified"));
                 basemap.on("load", setTimeout(function(){console.log("all visible tiles have been loaded...");
-                    generatePdf(map, _selectedDataset, filters, lastModified, function () {
+
+            var Key = "scale"    
+            var transfrm = d3.select(".leaflet-pane > svg g").attr("transform") ;
+            var b={};
+            var trans1 = transfrm.match(/(\w+\((\-?\d+\.?\d*e?\-?\d*,?)+\))+/g);
+            for (var i in trans1)
+                {
+                 var c = trans1[i].match(/[\w\.\-]+/g);
+                 b[c.shift()] = c;
+                }
+            var scales = b[Key];
+            var Key = "translate"    
+            var transfrm = d3.select(".leaflet-pane > svg g").attr("transform") ;
+            var b={};
+            var trans1 = transfrm.match(/(\w+\((\-?\d+\.?\d*e?\-?\d*,?)+\))+/g);
+            for (var i in trans1)
+                {
+                 var c = trans1[i].match(/[\w\.\-]+/g);
+                 b[c.shift()] = c;
+                }
+            var trans = b[Key];
+
+            var sw = d3.select(".leaflet-pane > svg").attr("width");
+            var sh = d3.select(".leaflet-pane > svg").attr("height");
+
+                    generatePdf(map, _selectedDataset, filters, lastModified, trans[0],trans[1],scales[0],scales[1],sw,sh, function () {
                         /*map.setMaxBounds([
                             [4.5,29.5],
                             [-1.5,34.5]
@@ -1540,10 +1562,10 @@ console.log(country);
         // console.log(values);
         var chartData = [headerList].concat([values]);
 
-        var valueLabelWidth = 20; // space reserved for value labels (right)
+        var valueLabelWidth = 10; // space reserved for value labels (right)
         var barHeight = 25; // height of one bar
-        var barLabelWidth = 200; // space reserved for bar labels
-        var barLabelPadding = 25; // padding between bar and bar labels (left)
+        var barLabelWidth = 180; // space reserved for bar labels
+        var barLabelPadding = 5; // padding between bar and bar labels (left)
         var gridLabelHeight = 18; // space reserved for gridline labels
         var gridChartOffset = 3; // space between start of grid and first bar
         var maxBarWidth = 175; // width of the bar with the max value
@@ -1647,32 +1669,20 @@ console.log(country);
 
 
 
-
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");
 //      var width = wrapper.node().offsetWidth || 960;
 //      var height = wrapper.node().offsetHeight || 480;
-  if ($(window).width() < 600)
-     {
-      $("#overlay-content").css("width","auto");
-     }
-  else 
-     {
-      $("#overlay-content").css("width","auto");
-     }
-
-    $("#overlay-content").center();
-
       var width = $(window).width();
       var height = $(window).height()-25;  
       // console.log(width, height);
       $(".toggler").css("height",height+25);
       var ht = $("#rtitle").height();
-      ht = ($(window).height() - ht)/2;
+      ht = (height - ht)/2;
       $("#rtitle").css("margin-top",ht+"px")
 
       var ht = $("#ltitle").height();
-      ht = ($(window).height() - ht)/2;
+      ht = (height - ht)/2;
       $("#ltitle").css("margin-top",ht+"px")
 
       if ($("#right").width()+$("#left").width() > width-40)
@@ -1684,13 +1694,13 @@ console.log(country);
          }     
       if (width < 400)
          {  
-//          $("#right").css("width","70%");
-          $("#right").css("min-width","301px");
-//          $("#left").css("width","70%");
-          $("#left").css("min-width","301px");
+          $("#right").css("width","80%");
+          // $("#right").css("min-width","307px");
+          $("#left").css("width","80%");
+          // $("#left").css("min-width","307px");
           if ($("#left").attr("data-status") =="opened")
              {
-//              $("#left").find(".toggler").trigger("click");
+              $("#left").find(".toggler").trigger("click");
              }
           if ($("#right").attr("data-status") =="opened")
              {
@@ -1699,85 +1709,31 @@ console.log(country);
          }   
       else
          {
-          $("#right").css("max-width","412px");
-          $("#right").css("min-width","412px");
-          $("#left").css("max-width","412px");
-          $("#left").css("min-width","412px");
+          $("#right").css("max-width","372px");
+          $("#right").css("min-width","372px");
+          $("#left").css("max-width","372px");
+          $("#left").css("min-width","372px");
          }    
       $("#d3-map-container").css("width",width);
       $("#d3-map-container").css("height",height);
-      if (width) {
-        d3.select("#d3-map-container").select("svg")
-          .attr("viewBox", "0 0 " + width + " " + height)
-          .attr("width", width)
-          .attr("height", height);
-      }  
-      $(".list-container").css("height", height + "px");
-     /*setTimeout(function(){
+//      if (width) {
+//        d3.select("#d3-map-container").select("svg")
+//          .attr("viewBox", "0 0 " + width + " " + height)
+//          .attr("width", width)
+//          .attr("height", height);
+//      }
+     setTimeout(function(){
         zoom = map.getBoundsZoom(cbounds); 
         map.setView(cbounds.getCenter(),zoom,{pan: {animate: true,duration: 1.5},zoom: {animate: true} });
         map.fitBounds(cbounds);
         map.invalidateSize();
-     },2000);*/
+     },2000);
 
+     if (reload)
+        { reload = false;
+         location.reload(true);
+        }     
     });
-
-
-      if ($(window).width() > 400)
-         {  
-          $("#right").css("max-width","412px");
-          $("#right").css("min-width","412px");
-          $("#left").css("max-width","412px");
-          $("#left").css("min-width","412px");
-          $("#left").find(".toggler").trigger("click");
-          $("#right").find(".toggler").trigger("click");
-          setTimeout(function(){   
-             if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                {
-                 if ($("#left").attr("data-status") =="opened")
-                    {
-                     $("#left").find(".toggler").trigger("click");
-                    } 
-                } 
-          },1000)
-         } 
-      else
-         {
-//          $("#left").find(".toggler").css("margin-top","-35px") 
-          $("#right").css("max-width","305px");
-          $("#right").css("min-width","305px");
-          $("#left").css("max-width","305px");
-          $("#left").css("min-width","305px");
-          $("#left").find(".toggler").trigger("click");
-          $("#right").find(".toggler").trigger("click");
-          $("#left").find(".toggler").trigger("click");
-          $("#right").find(".toggler").trigger("click");
-         }   
-
-      if ($(window).width() > 700)
-         {  
-          if ($("#left").attr("data-status") =="opened")
-             {
-              $("#left").find(".toggler").trigger("click");
-             }
-          if ($("#right").attr("data-status") =="opened")
-             {
-              $("#right").find(".toggler").trigger("click");
-             }
-         } 
-      else
-         {
-          if ($("#left").attr("data-status") =="closed")
-             {
-              $("#left").find(".toggler").trigger("click");
-             }
-          if ($("#right").attr("data-status") =="closed")
-             {
-//              $("#right").find(".toggler").trigger("click");
-             }  
-         }
-
-
     var triggerclick = false;
      $(document).on("click",".toggler",function(e){ 
       if (triggerclick)
@@ -1815,10 +1771,36 @@ console.log(country);
                  }   
              }
          }
+
      });
 
 
-
+      if ($(window).width() > 400)
+         {  
+          $("#right").css("max-width","372px");
+          $("#right").css("min-width","372px");
+          $("#left").css("max-width","372px");
+          $("#left").css("min-width","372px");
+          $("#left").find(".toggler").trigger("click");
+          $("#right").find(".toggler").trigger("click");
+          setTimeout(function(){   
+             if ($("#right").width()+$("#left").width() > $(window).width()-40)
+                {
+                 if ($("#left").attr("data-status") =="opened")
+                    {
+                     $("#left").find(".toggler").trigger("click");
+                    } 
+                } 
+          },1000)
+         } 
+      else
+         {
+          $("#left").find(".toggler").css("margin-top","-35px") 
+          $("#right").css("max-width","301px");
+          $("#right").css("min-width","301px");
+          $("#left").css("max-width","303px");
+          $("#left").css("min-width","303px");
+         }   
     } // ready
 
 

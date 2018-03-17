@@ -45,20 +45,37 @@ function makeRectangularCanvas(oldCanvas, callback) {
 	};
 }
 
-function _makeMapImage(map, callback) {
+
+function _makeMapImage(map,transx,transy,scalex,scaley,sw,sh, callback) { 
 	// Generate map image first
-	leafletImage(map, function (err, canvas) {
+	leafletImage(map, function (err, canvas) { 
 		var svg = document.querySelector('.leaflet-pane > svg');
 		console.log(svg)
 		var context = canvas.getContext('2d');
-
 		// Make png from SVG D3 map
-		svgAsPngUri(svg, {}, function (uri) {
+                deduct = 0;
+                if (scalex  < 1)
+                   {
+                    deduct = -50;
+                   }   
+		svgAsPngUri(svg, {left:0,top:deduct}, function (uri) {
 			var drawing = new Image();
-			drawing.src = uri;
-			drawing.onload = function () {
-				context.drawImage(drawing, 0, 0);
-
+			drawing.src = uri;top
+			drawing.onload = function () { 
+                                context.scale(parseFloat(scalex),parseFloat(scaley));
+                                if (scalex  < 1)
+                                   {
+                                    context.drawImage(drawing,0,0,sw,sh,(transx*(1/scalex))-35, (transy*(1/scaley))-60,sw,sh)
+                                   }
+                                else 
+                                   {
+                                    context.drawImage(drawing,0,0,sw,sh,(transx*(1/scalex))+48, (transy*(1/scaley)),sw,sh)
+                                   }
+//                                  context.drawImage(drawing,(transx*(1/scalex)), (transy*(1/scaley)));
+//                                context.drawImage(drawing, (parseFloat(canvas.width)-parseFloat(sw))/2, (parseFloat(canvas.height)-parseFloat(sh))/2)
+//                                context.drawImage(drawing, (transx*(1/scalex)), (transy*(1/scaley)),parseFloat(sw),parseFloat(sh),(transx*(1/scalex)), (transy*(1/scaley)),parseFloat(sw),parseFloat(sh));
+//                                context.drawImage(drawing, parseFloat(canvas.width)/2, parseFloat(canvas.height)/2);
+//                                context.drawImage(drawing, 0,0,parseFloat(canvas.width),parseFloat(canvas.height),(transx*(1/scalex)), (transy*(1/scaley)),parseFloat(sw),parseFloat(sh));
 				var imageEl = document.createElement('image');
 				imageEl.style.position = 'absolute';
 				imageEl.style.display = 'block';
@@ -69,7 +86,6 @@ function _makeMapImage(map, callback) {
 				imageEl.style.zIndex = -10000;
 				imageEl.setAttribute('src', canvas.toDataURL('image/png'));
 				document.body.appendChild(imageEl);
-
 				makeRectangularCanvas(canvas, function (canvas) {
 					var legend = document.querySelector('.menu-panel > svg');
 					svgAsPngUri(legend, {}, function (legendUri) {
@@ -81,12 +97,18 @@ function _makeMapImage(map, callback) {
 	});
 }
 
-function generatePdf(map, dataset, filters, lastModified, callback) {
+var right = 0;
+var left = 0;
+
+function generatePdf(map, dataset, filters, lastModified,transx,transy, scalex,scaley,sw,sh, callback) {
 	var IMAGE_SIZE = 170;
 	var DOC_WIDTH = 210;
     var img1;
     var img2;
-
+    right = $(".right-panel").css("right");
+    left = $(".left-panel").css("left");
+    $(".right-panel").css("right",0)
+    $(".left-panel").css("left",0)
     var toPrint = document.getElementsByClassName('right-panel');
     var toPrint1 = document.getElementsByClassName('left-panel');
     html2canvas(toPrint, {
@@ -94,7 +116,12 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
         allowTaint: true,
 //        transform: scale(2, 2),
         onrendered: function( canvas ) {
+           var ctx = canvas.getContext('2d');
+           ctx.webkitImageSmoothingEnabled = false;
+           ctx.mozImageSmoothingEnabled = false;
+           ctx.imageSmoothingEnabled = false;
             img1 = canvas.toDataURL('image/png');
+            $(".right-panel").css("right",right)
         }
     });
     html2canvas(toPrint1, {
@@ -102,12 +129,18 @@ function generatePdf(map, dataset, filters, lastModified, callback) {
         allowTaint: true,
 //        transform: scale(2, 2),
         onrendered: function( canvas ) {
-            img2 = canvas.toDataURL('image/png');
+           var ctx = canvas.getContext('2d');
+           ctx.webkitImageSmoothingEnabled = false;
+           ctx.mozImageSmoothingEnabled = false;
+           ctx.imageSmoothingEnabled = false;
+           img2 = canvas.toDataURL('image/png');
+           $(".left-panel").css("left",left)
+
         }
     });
 
 
-    _makeMapImage(map, function (canvas, legendUri) {
+    _makeMapImage(map,transx,transy,scalex,scaley,sw,sh, function (canvas, legendUri) {
 		var doc = new jsPDF();
 		var ratio = canvas.height / canvas.width;
 

@@ -14,16 +14,18 @@
     <script src="./js/nouislider.js"></script>
     <script src="./js/saveSvgAsPng.js"></script>
     <script src="./js/pdf.js"></script>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link href="./css/bootstrap.min.css"></link>
     <script src="./js/sidemenu.js"></script>
     <link href="./css/sidemenu.css" rel="Stylesheet" type="text/css">
     <script src="js/html2canvas.min.js"></script>
     <script src="js/jquery.plugin.html2canvas.js"></script>
+    <script src="js/leafletimage.js"></script>
+    <script src="js/simg.js"></script>
 </head>
 
 <body>
 
-<div id="overlay-content" style = "text-align: center;">
+<div id="overlay-content">
     For <br>
     -tailored solutions <br>
     -additional indicators <br>
@@ -32,9 +34,9 @@
 
     please contact <a href="info@geogecko.com" target="_top">info@geogecko.com</a>
 
-    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; background-color: rgba(245, 245, 245, 0.7); width: 90%;overflow:hidden;" >
+    <div class="custom-list" style="border-radius: 10px; height:66px;margin: auto; background-color: rgba(245, 245, 245, 0.7); width: 80%; left:50%; top: 50%">
         <a href="https://www.geogecko.com/" target="_blank">
-            <img src="./data/Logo_full.svg" alt="Geo Gecko" style="width:376px; height:66px;">
+            <img src="./data/Logo_full.svg" alt="Geo Gecko" style="width:261px; height:66px;">
         </a>
     </div>
     <br>
@@ -42,8 +44,34 @@
 </div>
 <div id="overlay"></div>
 <div class="main-container">
-    <div class="right-panel col-md-8 col-sm-8"  id = "right" style = "display:none;">
-        <span class="head col-md-4 col-sm-4" style="width:100%;"> 
+
+    <!--<div class="top-panel col-md-8 col-sm-8" style="top: 10px; left: 350px;">
+        <div class="head" style="width: 200px; height: 60px; font-family: 'Montserrat', sans-serif; font-size: 13px; border-radius: 3px;">
+            <p>To Filter: Use Sliders Below <br/>
+                For Info: Click Map Feature </p>
+        </div>
+    </div>-->
+
+     <!--<div class="top-panel col-md-8">
+        <div class="title-panel col-md-12">
+            <div id="header-text" style="margin: auto;">
+                <p><span>Data McDataface <span style="font-size: x-small"><i class="glyphicon glyphicon-info-sign"></i></span>
+                </span>
+                </p>
+
+           <div style="float:right; margin: auto;">
+                <span>
+                    <a href="https://www.geogecko.com/" target="_blank">
+                        <img src="./data/Logo.svg" alt="Geo Gecko" style="width:100%; height:100%;">
+                    </a>
+                </span>
+            </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="right-panel col-md-8 col-sm-8"  id = "right">
+        <!--<p class="custom-list-header" style="width:100%">Filters <i class="glyphicon glyphicon-chevron-down"></i></p>-->
+        <span class="head col-md-4 col-sm-4" style="left: 10px;"> 
            <div>
             <span class="custom-count-header" style="height:23.2px; font-size: 16px;">
                <span>Districts </span>
@@ -73,6 +101,7 @@
            <span style="border-radius: 10px;"><i id="d3-map-make-pdf"><img src = "./css/images/Download.svg" style  ="width:30px;height:30px;" id = "download" title = "Download PDF"></i></span>
         </p>
 
+
         <div class="col-md-12" style = "overflow-y:auto;" id = "filters">
                 <p class="custom-list-header">Socio-Economic <!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
                     <div id="socio-economic-list" class="custom-list"></div>
@@ -84,21 +113,24 @@
                     <div id="energy-list" class="custom-list"></div>
 
             <p class="custom-list-header"><!--<i class="glyphicon glyphicon-chevron-down"></i>--></p>
-            <div class="custom-list" style="margin: auto; left:50%; top: 50%">
+            <!--<div class="custom-list" style="margin: auto; left:50%; top: 50%">
                 <a href="https://www.geogecko.com/" target="_blank">
                 <img src="./data/Logo.svg" alt="Geo Gecko" style="width:261px; height:66px;">
                 </a>
-            </div>
+            </div>-->
         </div>
+
     </div>
 
 </div>
 <div class="row" style="margin:0px;">
     <!--<div class="bottom-panel col-md-12" style="padding: 0 5px;">  <span class="glyphicon glyphicon-menu-down"></span>-->
-    <div class="left-panel col-md-2" id = "left" style = "display:none;">
-        <div class="menu-panel" style = "">
-          <svg style = "height:0px;">
-            <div class="list-container" style = "">
+    <div class="left-panel col-md-2" id = "left">
+
+        <div class="menu-panel">
+
+            <svg style = "height:0px;">
+            <div class="list-container">
                 <div class="col-md-12">
                     <p id="districtHeader" class="custom-list-header">National Average </p>
                     <div id="statistics-list" class="custom-list" style="top:10px;"></div>
@@ -123,8 +155,11 @@
                      </div>
                 </div>
             </div>
-         </svg>
+            </svg>
+
+
         </div>
+
     </div>
 
     <div>
@@ -162,8 +197,6 @@
     $("#play").on("click", function () {
         $("#overlay").fadeOut();
         $("#overlay-content").fadeOut();
-        $("#right").show();
-        $("#left").show();
     });
 
     $('#right').BootSideMenu({side:"right", autoClose:true}); 
@@ -174,7 +207,6 @@
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
-<script src="https://unpkg.com/leaflet-image@latest/leaflet-image.js"></script>
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>

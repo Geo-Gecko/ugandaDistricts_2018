@@ -27,12 +27,11 @@
 		oldCode = this.html();
 
 		newCode += "<div class=\"row\">\n";
-newCode += "<div  data-side=\""+side+"\">\n"+ oldCode+" </div>\n";
-// 		newCode += "<div class=\"col-xs-4 col-sm-4 col-md-4 col-lg1-4\" data-side=\""+side+"\">\n"+ oldCode+" </div>\n";
+ 		newCode += "<div class=\"col-xs-4 col-sm-4 col-md-4 col-lg1-4\" data-side=\""+side+"\">\n"+ oldCode+" </div>\n";
 //	newCode += "<div class=\"col-xs-2 col-sm-2 col-md-2 col-lg1-2\" data-side=\""+side+"\">\n"+ oldCode+" </div>\n";
 		newCode += "</div>";
 		newCode += "<div class=\"toggler\">\n";
-		newCode += "	<span style = 'left:20px;' class=\"glyphicon glyphicon-chevron-right\"><!--&nbsp;--></span> <span class=\"glyphicon glyphicon-chevron-left\"><!--&nbsp;--></span>\n";
+		newCode += "	<span class=\"glyphicon glyphicon-chevron-right\"><!--&nbsp;--></span> <span class=\"glyphicon glyphicon-chevron-left\"><!--&nbsp;--></span>\n";
 		newCode += "</div>\n";
 
 		this.html(newCode);
@@ -87,12 +86,8 @@ newCode += "<div  data-side=\""+side+"\">\n"+ oldCode+" </div>\n";
 
 
 	$(document).on('click','.toggler', function(){
-                $(".toggler").parent().each(function(){
-                   $(this).css("z-index","100001");
-                });             
 		var toggler = $(this);
 		var container = toggler.parent();
-                container.css("z-index","100002"); 
 		var listaClassi = container[0].classList;
 		var side = getSide(listaClassi);
 		var containerWidth = container.width();
@@ -137,12 +132,12 @@ function doAnimation(container, containerWidth, sidebarSide, sidebarStatus){
 	if(sidebarStatus=="opened"){
 		if(sidebarSide=="left"){
 			container.animate({
-				left:-(containerWidth+8)
+				left:-(containerWidth+2)
 			});
 			toggleArrow(toggler, "left");
 		}else if(sidebarSide=="right"){
 			container.animate({
-				right:- (containerWidth+8)
+				right:- (containerWidth+2)
 			});
 			toggleArrow(toggler, "right");
 		}
