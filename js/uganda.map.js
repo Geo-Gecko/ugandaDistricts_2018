@@ -3,6 +3,8 @@ var  map;
 var ugandaPath;
 var reload = true;
 var countries = [];
+var tclick;
+var idclicked;
 (function (d3, $, queue, window) {
   'use strict';
   $("#filters").css("height",$(window).height()-$("#filters").offset().top-10+"px")
@@ -1691,6 +1693,10 @@ var countries = [];
              {
               $("#left").find(".toggler").trigger("click");
              } 
+          if ($("#right").attr("data-status") =="opened")
+             {
+              $("#right").find(".toggler").trigger("click");
+             } 
          }     
       if (width < 400)
          {  
@@ -1698,14 +1704,6 @@ var countries = [];
           // $("#right").css("min-width","307px");
           $("#left").css("width","80%");
           // $("#left").css("min-width","307px");
-          if ($("#left").attr("data-status") =="opened")
-             {
-              $("#left").find(".toggler").trigger("click");
-             }
-          if ($("#right").attr("data-status") =="opened")
-             {
-              $("#right").find(".toggler").trigger("click");
-             }  
          }   
       else
          {
@@ -1714,6 +1712,16 @@ var countries = [];
           $("#left").css("max-width","372px");
           $("#left").css("min-width","372px");
          }    
+      if (width < 600)
+         {
+          $("#right").find(".toggler").trigger("click");
+        }
+     else
+        {
+         $("#left").find(".toggler").trigger("click");
+         $("#right").find(".toggler").trigger("click");
+        }  
+
       $("#d3-map-container").css("width",width);
       $("#d3-map-container").css("height",height);
 //      if (width) {
@@ -1730,32 +1738,92 @@ var countries = [];
      },2000);
 
      if (reload)
-        { reload = false;
+        { 
+         reload = false;
          location.reload(true);
         }     
     });
-    var triggerclick = false;
+    if ($(window).width() > 400)
+       {  
+        $("#right").css("max-width","372px");
+        $("#right").css("min-width","372px");
+        $("#left").css("max-width","372px");
+        $("#left").css("min-width","372px");
+        $("#left").find(".toggler").trigger("click");
+        $("#right").find(".toggler").trigger("click");
+       } 
+    else
+       {
+        $("#left").find(".toggler").css("margin-top","-35px") 
+        $("#right").css("max-width","301px");
+        $("#right").css("min-width","301px");
+        $("#left").css("max-width","303px");
+        $("#left").css("min-width","303px");
+       }   
+    tclick = true;
+    if ($("#left").attr("data-status") =="opened")
+       {
+        $("#left").find(".toggler").trigger("click");
+       } 
+    if ($("#right").attr("data-status") =="opened")
+       {
+        $("#right").find(".toggler").trigger("click");
+       } 
+    setTimeout(function(){ 
+       if ($(window).width() < 600)
+          { 
+           $("#left").find(".toggler").trigger("click");
+          }
+       else
+          {
+           $("#left").find(".toggler").trigger("click");
+           $("#right").find(".toggler").trigger("click");
+          }  
+       setTimeout(function(){ 
+          tclick = false;
+       },500)
+     },1000)  
+
+
+     var triggerclick = false;
      $(document).on("click",".toggler",function(e){ 
-      if (triggerclick)
+//      if (triggerclick)
+//         {
+//          triggerclick = false;  
+//          return;  
+//         }
+      if (tclick)
          {
-          triggerclick = false;  
-          return;  
-         }
+          return;
+         }    
+      idclicked = $(this).parent().attr("id");
       e.stopPropagation();
       e.preventDefault(); 
-      if ($(window).width() < 400)
-         {  
+      if ($(window).width() < 600)
+         {     
+          tclick = true;    
           setTimeout(function(){   
-             if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
-                {
-                 if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                    {
-                     $("#left").find(".toggler").trigger("click");
-                    } 
-                }
-             else
-                {
-                }  
+             setTimeout(function(){ 
+                if (idclicked == "left" && $("#right").attr("data-status") =="opened")
+                   {    
+                    $("#right").find(".toggler").trigger("click");
+                    setTimeout(function(){ 
+//                        $("#left").find(".toggler").trigger("click");
+                        tclick = false;
+                    },500);    
+                   } 
+                if (idclicked == "right" && $("#left").attr("data-status") =="opened")
+                   { 
+                    $("#left").find(".toggler").trigger("click");
+                    setTimeout(function(){ 
+//                        $("#right").find(".toggler").trigger("click");
+                        tclick = false;
+                    },500);  
+                   } 
+                 setTimeout(function(){  
+                        tclick = false;
+                  },500);  
+            },500)
           },500) 
          } 
       else
@@ -1775,32 +1843,6 @@ var countries = [];
      });
 
 
-      if ($(window).width() > 400)
-         {  
-          $("#right").css("max-width","372px");
-          $("#right").css("min-width","372px");
-          $("#left").css("max-width","372px");
-          $("#left").css("min-width","372px");
-          $("#left").find(".toggler").trigger("click");
-          $("#right").find(".toggler").trigger("click");
-          setTimeout(function(){   
-             if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                {
-                 if ($("#left").attr("data-status") =="opened")
-                    {
-                     $("#left").find(".toggler").trigger("click");
-                    } 
-                } 
-          },1000)
-         } 
-      else
-         {
-          $("#left").find(".toggler").css("margin-top","-35px") 
-          $("#right").css("max-width","301px");
-          $("#right").css("min-width","301px");
-          $("#left").css("max-width","303px");
-          $("#left").css("min-width","303px");
-         }   
     } // ready
 
 
