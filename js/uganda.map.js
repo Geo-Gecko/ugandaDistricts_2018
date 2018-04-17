@@ -1667,7 +1667,7 @@ var idclicked;
         //https://codepen.io/paulobrien/pen/AByuk
         //https://hibbard.eu/display-ui-blocking-overlay-on-page-load/
 
-
+alert($(window).width());
     if ($(window).width() > 450)
        {  
         $("#right").css("max-width","372px");
