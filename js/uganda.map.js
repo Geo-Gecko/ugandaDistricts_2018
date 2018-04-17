@@ -1671,7 +1671,7 @@ var idclicked;
 
 
 
-    if ($(window).width() > 380)
+    if ($(window).width() > 400)
        {  
         $("#right").css("max-width","372px");
         $("#right").css("min-width","372px");
@@ -1683,10 +1683,10 @@ var idclicked;
     else
        {
         $("#left").find(".toggler").css("margin-top","-35px") 
-        $("#right").css("max-width","301px");
-        $("#right").css("min-width","301px");
-        $("#left").css("max-width","303px");
-        $("#left").css("min-width","303px");
+        $("#right").css("max-width","385px");
+        $("#right").css("min-width","385px");
+        $("#left").css("max-width","385px");
+        $("#left").css("min-width","385px");
        }   
     tclick = true;
     if ($("#left").attr("data-status") =="opened")
