@@ -1711,7 +1711,7 @@ function detectmob() {
         $("#right").find(".toggler").trigger("click");
        } 
     setTimeout(function(){ 
-       if ($(window).width() < 600 && detectmob()))
+       if ($(window).width() < 600 && detectmob())
           { 
            $("#left").find(".toggler").trigger("click");
           }
@@ -1740,7 +1740,7 @@ function detectmob() {
       idclicked = $(this).parent().attr("id");
       e.stopPropagation();
       e.preventDefault(); 
-      if ($(window).width() < 600 && detectmob()))
+      if ($(window).width() < 600 && detectmob())
          {     
           tclick = true;    
           setTimeout(function(){   
