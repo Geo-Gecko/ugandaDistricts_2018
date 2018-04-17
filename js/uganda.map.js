@@ -1668,7 +1668,7 @@ var idclicked;
         //https://hibbard.eu/display-ui-blocking-overlay-on-page-load/
 
 
-
+alert("hi");
 
 
     if ($(window).width() > 400)
@@ -1701,7 +1701,6 @@ var idclicked;
        if ($(window).width() < 600)
           { 
 //           $("#left").find(".toggler").trigger("click");
-alert("hi");
            $("#left").find(".toggler")[0].click();
           }
        else
