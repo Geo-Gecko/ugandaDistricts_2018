@@ -1673,6 +1673,8 @@ var idclicked;
         $("#right").css("min-width","372px");
         $("#left").css("max-width","372px");
         $("#left").css("min-width","372px");
+        $("#left").find(".toggler")[0].click();
+        $("#right").find(".toggler")[0].click();
 //        $("#left").find(".toggler").trigger("click");
 //        $("#right").find(".toggler").trigger("click");
        } 
@@ -1687,11 +1689,13 @@ var idclicked;
     tclick = true;
     if ($("#left").attr("data-status") =="opened")
        {
-        $("#left").find(".toggler").trigger("click");
+        $("#left").find(".toggler")[0].click();
+//        $("#left").find(".toggler").trigger("click");
        } 
     if ($("#right").attr("data-status") =="opened")
        {
-        $("#right").find(".toggler").trigger("click");
+        $("#right").find(".toggler")[0].click();
+//        $("#right").find(".toggler").trigger("click");
        } 
     setTimeout(function(){ 
        if ($(window).width() < 600)
@@ -1701,8 +1705,10 @@ var idclicked;
           }
        else
           {
-           $("#left").find(".toggler").trigger("click");
-           $("#right").find(".toggler").trigger("click");
+           $("#left").find(".toggler")[0].click();
+           $("#right").find(".toggler")[0].click();
+//           $("#left").find(".toggler").trigger("click");
+//           $("#right").find(".toggler").trigger("click");
           }  
        setTimeout(function(){ 
           tclick = false;
