@@ -1671,7 +1671,7 @@ var idclicked;
 
 
 
-    if ($(window).width() > 400)
+    if ($(window).width() > 380)
        {  
         $("#right").css("max-width","372px");
         $("#right").css("min-width","372px");
