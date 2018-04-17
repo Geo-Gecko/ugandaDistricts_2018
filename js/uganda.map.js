@@ -1683,9 +1683,8 @@ function detectmob() {
   }
 }
 
-   alert(detectmob());
 
-    if ($(window).width() > 400 && window.screen.width > 400)
+    if ($(window).width() > 400 && !detectmob())
        {  
         $("#right").css("max-width","372px");
         $("#right").css("min-width","372px");
