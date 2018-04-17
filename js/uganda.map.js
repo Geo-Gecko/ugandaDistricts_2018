@@ -1772,7 +1772,8 @@ var idclicked;
     setTimeout(function(){ 
        if ($(window).width() < 600)
           { 
-           $("#left").find(".toggler").trigger("click");
+//           $("#left").find(".toggler").trigger("click");
+           $("#left").find(".toggler")[0].click();
           }
        else
           {
@@ -1782,7 +1783,7 @@ var idclicked;
        setTimeout(function(){ 
           tclick = false;
        },500)
-     },1000)  
+     },2000)  
 
 
      var triggerclick = false;
