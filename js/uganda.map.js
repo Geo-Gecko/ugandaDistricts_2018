@@ -1671,6 +1671,108 @@ var idclicked;
 
 
 
+    if ($(window).width() > 400)
+       {  
+        $("#right").css("max-width","372px");
+        $("#right").css("min-width","372px");
+        $("#left").css("max-width","372px");
+        $("#left").css("min-width","372px");
+        $("#left").find(".toggler").trigger("click");
+        $("#right").find(".toggler").trigger("click");
+       } 
+    else
+       {
+        $("#left").find(".toggler").css("margin-top","-35px") 
+        $("#right").css("max-width","301px");
+        $("#right").css("min-width","301px");
+        $("#left").css("max-width","303px");
+        $("#left").css("min-width","303px");
+       }   
+    tclick = true;
+    if ($("#left").attr("data-status") =="opened")
+       {
+        $("#left").find(".toggler").trigger("click");
+       } 
+    if ($("#right").attr("data-status") =="opened")
+       {
+        $("#right").find(".toggler").trigger("click");
+       } 
+    setTimeout(function(){ 
+       if ($(window).width() < 600)
+          { 
+//           $("#left").find(".toggler").trigger("click");
+alert("hi");
+           $("#left").find(".toggler")[0].click();
+          }
+       else
+          {
+           $("#left").find(".toggler").trigger("click");
+           $("#right").find(".toggler").trigger("click");
+          }  
+       setTimeout(function(){ 
+          tclick = false;
+       },500)
+     },2000)  
+
+
+     var triggerclick = false;
+     $(document).on("click",".toggler",function(e){ 
+//      if (triggerclick)
+//         {
+//          triggerclick = false;  
+//          return;  
+//         }
+      if (tclick)
+         {
+          return;
+         }    
+      idclicked = $(this).parent().attr("id");
+      e.stopPropagation();
+      e.preventDefault(); 
+      if ($(window).width() < 600)
+         {     
+          tclick = true;    
+          setTimeout(function(){   
+             setTimeout(function(){ 
+                if (idclicked == "left" && $("#right").attr("data-status") =="opened")
+                   {    
+                    $("#right").find(".toggler").trigger("click");
+                    setTimeout(function(){ 
+//                        $("#left").find(".toggler").trigger("click");
+                        tclick = false;
+                    },500);    
+                   } 
+                if (idclicked == "right" && $("#left").attr("data-status") =="opened")
+                   { 
+                    $("#left").find(".toggler").trigger("click");
+                    setTimeout(function(){ 
+//                        $("#right").find(".toggler").trigger("click");
+                        tclick = false;
+                    },500);  
+                   } 
+                 setTimeout(function(){  
+                        tclick = false;
+                  },500);  
+            },500)
+          },500) 
+         } 
+      else
+         {
+          if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
+             {
+              if ($("#right").width()+$("#left").width() > $(window).width()-40)
+                 {
+                  if ($("#left").attr("data-status") =="opened")
+                     {
+                      $("#left").find(".toggler").trigger("click");
+                     } 
+                 }   
+             }
+         }
+
+     });
+
+
     window.addEventListener("resize", function () {
       var wrapper = d3.select("#d3-map-wrapper");
 //      var width = wrapper.node().offsetWidth || 960;
@@ -1743,105 +1845,7 @@ var idclicked;
          location.reload(true);
         }     
     });
-    if ($(window).width() > 400)
-       {  
-        $("#right").css("max-width","372px");
-        $("#right").css("min-width","372px");
-        $("#left").css("max-width","372px");
-        $("#left").css("min-width","372px");
-        $("#left").find(".toggler").trigger("click");
-        $("#right").find(".toggler").trigger("click");
-       } 
-    else
-       {
-        $("#left").find(".toggler").css("margin-top","-35px") 
-        $("#right").css("max-width","301px");
-        $("#right").css("min-width","301px");
-        $("#left").css("max-width","303px");
-        $("#left").css("min-width","303px");
-       }   
-    tclick = true;
-    if ($("#left").attr("data-status") =="opened")
-       {
-        $("#left").find(".toggler").trigger("click");
-       } 
-    if ($("#right").attr("data-status") =="opened")
-       {
-        $("#right").find(".toggler").trigger("click");
-       } 
-    setTimeout(function(){ 
-       if ($(window).width() < 600)
-          { 
-//           $("#left").find(".toggler").trigger("click");
-           $("#left").find(".toggler")[0].click();
-          }
-       else
-          {
-           $("#left").find(".toggler").trigger("click");
-           $("#right").find(".toggler").trigger("click");
-          }  
-       setTimeout(function(){ 
-          tclick = false;
-       },500)
-     },2000)  
 
-
-     var triggerclick = false;
-     $(document).on("click",".toggler",function(e){ 
-//      if (triggerclick)
-//         {
-//          triggerclick = false;  
-//          return;  
-//         }
-      if (tclick)
-         {
-          return;
-         }    
-      idclicked = $(this).parent().attr("id");
-      e.stopPropagation();
-      e.preventDefault(); 
-      if ($(window).width() < 600)
-         {     
-          tclick = true;    
-          setTimeout(function(){   
-             setTimeout(function(){ 
-                if (idclicked == "left" && $("#right").attr("data-status") =="opened")
-                   {    
-                    $("#right").find(".toggler").trigger("click");
-                    setTimeout(function(){ 
-//                        $("#left").find(".toggler").trigger("click");
-                        tclick = false;
-                    },500);    
-                   } 
-                if (idclicked == "right" && $("#left").attr("data-status") =="opened")
-                   { 
-                    $("#left").find(".toggler").trigger("click");
-                    setTimeout(function(){ 
-//                        $("#right").find(".toggler").trigger("click");
-                        tclick = false;
-                    },500);  
-                   } 
-                 setTimeout(function(){  
-                        tclick = false;
-                  },500);  
-            },500)
-          },500) 
-         } 
-      else
-         {
-          if ($("#left").attr("data-status") =="opened" && $("#right").attr("data-status") =="opened")
-             {
-              if ($("#right").width()+$("#left").width() > $(window).width()-40)
-                 {
-                  if ($("#left").attr("data-status") =="opened")
-                     {
-                      $("#left").find(".toggler").trigger("click");
-                     } 
-                 }   
-             }
-         }
-
-     });
 
 
     } // ready
