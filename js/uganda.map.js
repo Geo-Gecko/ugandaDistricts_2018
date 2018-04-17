@@ -1668,7 +1668,7 @@ var idclicked;
         //https://hibbard.eu/display-ui-blocking-overlay-on-page-load/
 
 
-    if ($(window).width() > 400)
+    if ($(window).width() > 430)
        {  
         $("#right").css("max-width","372px");
         $("#right").css("min-width","372px");
