@@ -1667,20 +1667,17 @@ var idclicked;
         //https://codepen.io/paulobrien/pen/AByuk
         //https://hibbard.eu/display-ui-blocking-overlay-on-page-load/
 
-alert($(window).width());
     if ($(window).width() > 450)
        {  
         $("#right").css("max-width","372px");
         $("#right").css("min-width","372px");
         $("#left").css("max-width","372px");
         $("#left").css("min-width","372px");
-alert("hi1");
-        $("#left").find(".toggler").trigger("click");
-        $("#right").find(".toggler").trigger("click");
+//        $("#left").find(".toggler").trigger("click");
+//        $("#right").find(".toggler").trigger("click");
        } 
     else
        {
-alert("hi2");
         $("#left").find(".toggler").css("margin-top","-35px") 
         $("#right").css("max-width","385px");
         $("#right").css("min-width","385px");
